@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useRouter } from './useRouter'
-import type { BlockerFn } from '@tanstack/history'
+import type { BlockerFn, BlockerTaskInfo } from '@tanstack/history'
 import type { ReactNode } from './route'
 
 type BlockerResolver = {
@@ -45,10 +45,10 @@ export function useBlocker(
   })
 
   React.useEffect(() => {
-    const blockerFnComposed = async () => {
+    const blockerFnComposed = async (taskInfo: BlockerTaskInfo) => {
       // If a function is provided, it takes precedence over the promise blocker
       if (blockerFn) {
-        return await blockerFn()
+        return await blockerFn(taskInfo)
       }
 
       const promise = new Promise<boolean>((resolve) => {

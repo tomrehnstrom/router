@@ -34,9 +34,18 @@ export interface HistoryState {
 
 type ShouldAllowNavigation = any
 
-export type BlockerFn = () =>
-  | Promise<ShouldAllowNavigation>
-  | ShouldAllowNavigation
+export type BlockerTaskInfo =
+  | {
+      path: string
+      type: 'push' | 'replace'
+    }
+  | {
+      type: 'go' | 'back' | 'forward'
+    }
+
+export type BlockerFn = (
+  taskInfo: BlockerTaskInfo,
+) => Promise<ShouldAllowNavigation> | ShouldAllowNavigation
 
 const pushStateEvent = 'pushstate'
 const popStateEvent = 'popstate'
@@ -75,10 +84,10 @@ export function createHistory(opts: {
     subscribers.forEach((subscriber) => subscriber())
   }
 
-  const tryNavigation = async (task: () => void) => {
+  const tryNavigation = async (task: () => void, taskInfo: BlockerTaskInfo) => {
     if (typeof document !== 'undefined' && blockers.length) {
       for (const blocker of blockers) {
-        const allowed = await blocker()
+        const allowed = await blocker(taskInfo)
         if (!allowed) {
           opts.onBlocked?.(notify)
           return
@@ -102,35 +111,62 @@ export function createHistory(opts: {
     },
     push: (path: string, state: any) => {
       state = assignKey(state)
-      tryNavigation(() => {
-        opts.pushState(path, state)
-        notify()
-      })
+      tryNavigation(
+        () => {
+          opts.pushState(path, state)
+          notify()
+        },
+        {
+          type: 'push',
+          path,
+        },
+      )
     },
     replace: (path: string, state: any) => {
       state = assignKey(state)
-      tryNavigation(() => {
-        opts.replaceState(path, state)
-        notify()
-      })
+      tryNavigation(
+        () => {
+          opts.replaceState(path, state)
+          notify()
+        },
+        {
+          type: 'replace',
+          path,
+        },
+      )
     },
     go: (index) => {
-      tryNavigation(() => {
-        opts.go(index)
-        notify()
-      })
+      tryNavigation(
+        () => {
+          opts.go(index)
+          notify()
+        },
+        {
+          type: 'go',
+        },
+      )
     },
     back: () => {
-      tryNavigation(() => {
-        opts.back()
-        notify()
-      })
+      tryNavigation(
+        () => {
+          opts.back()
+          notify()
+        },
+        {
+          type: 'back',
+        },
+      )
     },
     forward: () => {
-      tryNavigation(() => {
-        opts.forward()
-        notify()
-      })
+      tryNavigation(
+        () => {
+          opts.forward()
+          notify()
+        },
+        {
+          type: 'forward',
+        },
+      )
     },
     createHref: (str) => opts.createHref(str),
     block: (blocker) => {
