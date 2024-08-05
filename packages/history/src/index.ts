@@ -133,6 +133,7 @@ export function createHistory(opts: {
     },
     push: (path: string, state: any) => {
       state = assignKey(state)
+      console.log('TRY NAVIGATION')
       tryNavigation({
         task: () => {
           opts.pushState(path, state)

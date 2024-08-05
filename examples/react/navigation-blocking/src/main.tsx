@@ -16,6 +16,12 @@ const rootRoute = createRootRoute({
 })
 
 function RootComponent() {
+  const { proceed, reset, status } = useBlocker({
+    from: '/editor-1',
+    to: '/editor-1/editor-2',
+    blockerFn: () => true,
+  })
+
   return (
     <>
       <div className="p-2 flex gap-2 text-lg">
@@ -38,6 +44,24 @@ function RootComponent() {
         </Link>
       </div>
       <hr />
+
+      {status === 'blocked' && (
+        <div className="mt-2">
+          <div>Are you sure you want to leave editor 1?</div>
+          <button
+            className="bg-lime-500 text-white rounded p-1 px-2 mr-2"
+            onClick={proceed}
+          >
+            YES
+          </button>
+          <button
+            className="bg-red-500 text-white rounded p-1 px-2"
+            onClick={reset}
+          >
+            NO
+          </button>
+        </div>
+      )}
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
     </>
@@ -68,13 +92,6 @@ function Editor1Component() {
   const [value, setValue] = React.useState('')
   const [useCustomBlocker, setUseCustomBlocker] = React.useState(false)
 
-  const { proceed, reset, status } = useBlocker({
-    blockerFn: useCustomBlocker
-      ? undefined
-      : () => window.confirm('Are you sure you want to leave editor 1?'),
-    condition: value,
-  })
-
   return (
     <div className="flex flex-col p-2">
       <h3>Editor 1</h3>
@@ -93,23 +110,6 @@ function Editor1Component() {
           className="border"
         />
       </div>
-      {status === 'blocked' && (
-        <div className="mt-2">
-          <div>Are you sure you want to leave editor 1?</div>
-          <button
-            className="bg-lime-500 text-white rounded p-1 px-2 mr-2"
-            onClick={proceed}
-          >
-            YES
-          </button>
-          <button
-            className="bg-red-500 text-white rounded p-1 px-2"
-            onClick={reset}
-          >
-            NO
-          </button>
-        </div>
-      )}
       <hr className="m-2" />
       <Link to="/editor-1/editor-2">Go to Editor 2</Link>
       <Outlet />
@@ -125,11 +125,6 @@ const editor2Route = createRoute({
 
 function Editor2Component() {
   const [value, setValue] = React.useState('')
-
-  useBlocker({
-    blockerFn: () => window.confirm('Are you sure you want to leave editor 2?'),
-    condition: value,
-  })
 
   return (
     <div className="p-2">
