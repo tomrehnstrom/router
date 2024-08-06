@@ -6,25 +6,36 @@ Most of the TanStack Router documentation is written for file-based routing. Thi
 
 ## Prerequisites
 
-To enable file-based route generation, you'll need to install either the `@tanstack/router-vite-plugin` or `@tanstack/router-cli` package to generate your route tree file.
+To enable file-based routing, you'll need to be using React with a supported bundler. TanStack Router currently has support for the following bundlers:
 
-## Vite Plugin
+- Vite
+- Rspack/Rsbuild
+- Webpack
+- Others??? (let us know if you'd like to see support for a specific bundler)
 
-The `@tanstack/router-vite-plugin` Vite plugin will **automatically generate your route configuration through Vite's dev and build processes**. It is the easiest way to use TanStack Router's route generation features.
+If your bundler is not yet supported, you can reach out to us on Discord or GitHub to let us know. Till then, fear not! You can still use the use the [`@tanstack/router-cli`](#configuration-with-the-tanstack-router-cli) package to generate your route tree file.
+
+## Installation
+
+To get started with file-based routing, you'll need to configure your project's bundler to use the TanStack Router Plugin or the TanStack Router CLI.
+
+If you are using TanStack Router's file-based routing through a bundler, the plugin will **automatically generate your route configuration through your bundler's dev and build processes**. It is the easiest way to use TanStack Router's route generation features.
+
+### Configuration with Vite
+
+To use file-based routing with **Vite**, you'll need to install the `@tanstack/router-plugin` package.
 
 ```sh
-npm install @tanstack/router-vite-plugin
+npm install -D @tanstack/router-plugin
 ```
 
-### Vite Configuration
-
-To enable the Vite plugin, add it to your `vite.config.ts` file:
+Once installed, you'll need to add the plugin to your Vite configuration.
 
 ```tsx
 // vite.config.ts
 import { defineConfig } from 'vite'
 import viteReact from '@vitejs/plugin-react'
-import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,7 +47,104 @@ export default defineConfig({
 })
 ```
 
-With the plugin enabled, Vite will now watch your configured `routesDirectory` and generate your route tree whenever a file is added, removed, or changed.
+Or, you can clone our [Quickstart Vite example](https://github.com/TanStack/router/tree/main/examples/react/quickstart-file-based) and get started.
+
+> [!WARNING]
+> If you are using the older `@tanstack/router-vite-plugin` package, you can still continue to use it, as it will be aliased to the `@tanstack/router-plugin/vite` package. However, we would recommend using the `@tanstack/router-plugin` package directly.
+
+### Configuration with Rspack/Rsbuild
+
+To use file-based routing with **Rspack** or **Rsbuild**, you'll need to install the `@tanstack/router-plugin` package.
+
+```sh
+npm install -D @tanstack/router-plugin
+```
+
+Once installed, you'll need to add the plugin to your configuration.
+
+```tsx
+// rsbuild.config.ts
+import { defineConfig } from '@rsbuild/core'
+import { pluginReact } from '@rsbuild/plugin-react'
+import { TanStackRouterRspack } from '@tanstack/router-plugin/rspack'
+
+export default defineConfig({
+  plugins: [pluginReact()],
+  tools: {
+    rspack: {
+      plugins: [TanStackRouterRspack()],
+    },
+  },
+})
+```
+
+Or, you can clone our [Quickstart Rspack/Rsbuild example](https://github.com/TanStack/router/tree/main/examples/react/quickstart-rspack-file-based) and get started.
+
+### Configuration with Webpack
+
+To use file-based routing with **Webpack**, you'll need to install the `@tanstack/router-plugin` package.
+
+```sh
+npm install -D @tanstack/router-plugin
+```
+
+Once installed, you'll need to add the plugin to your configuration.
+
+```tsx
+// webpack.config.ts
+import { TanStackRouterWebpack } from '@tanstack/router-plugin/webpack'
+
+export default {
+  plugins: [TanStackRouterWebpack()],
+}
+```
+
+Or, you can clone our [Quickstart Webpack example](https://github.com/TanStack/router/tree/main/examples/react/quickstart-webpack-file-based) and get started.
+
+### Configuration with the TanStack Router CLI
+
+To use file-based routing with the TanStack Router CLI, you'll need to install the `@tanstack/router-cli` package.
+
+```sh
+npm install -D @tanstack/router-cli
+```
+
+Once installed, you'll need to amend your your scripts in your `package.json` for the CLI to `watch` and `generate` files.
+
+```json
+{
+  "scripts": {
+    "generate-routes": "tsr generate",
+    "watch-routes": "tsr watch",
+    "build": "npm run generate-routes && ...",
+    "dev": "npm run watch-routes && ..."
+  }
+}
+```
+
+With the CLI installed, the following commands are made available via the `tsr` command
+
+#### Using the `generate` command
+
+Generates the routes for a project based on the provided configuration.
+
+```sh
+tsr generate
+```
+
+#### Using the `watch` command
+
+Continuously watches the specified directories and regenerates routes as needed.
+
+**Usage:**
+
+```sh
+tsr watch
+```
+
+With file-based routing enabled, whenever you start your application in development mode, TanStack Router will watch your configured `routesDirectory` and generate your route tree whenever a file is added, removed, or changed.
+
+### Disabling the TanStack Router Plugin during tests
 
 > ⚠️ Note: To disable the plugin when running tests via vitest, you can conditionally add it based on the current `NODE_ENV`:
 
@@ -57,36 +165,6 @@ export default defineConfig({
     // ...
   ],
 })
-```
-
-## Router CLI
-
-If you are unable to use Vite, you can always use the Router CLI (which is what the Vite plugin uses) to generate your route configuration from your package dev/build scripts.
-
-```sh
-npm install @tanstack/router-cli
-```
-
-With the CLI installed, the following commands are made available via the `tsr` command
-
-### `generate`
-
-Generates the routes for a project based on the provided configuration.
-
-**Usage:**
-
-```bash
-tsr generate
-```
-
-### `watch`
-
-Continuously watches the specified directories and regenerates routes as needed.
-
-**Usage:**
-
-```bash
-tsr watch
 ```
 
 ## Configuration
@@ -110,7 +188,8 @@ If these defaults work for your project, you don't need to configure anything at
 
 The following options are available for configuration via the `tsr.config.json` file:
 
-> **🚨 Important:** Do not set the `routeFilePrefix`, `routeFileIgnorePrefix`, or `routeFileIgnorePattern` options, to match any of the tokens used in the [file-naming conventions](#file-naming-conventions) section.
+> [!IMPORTANT]
+> Do not set the `routeFilePrefix`, `routeFileIgnorePrefix`, or `routeFileIgnorePattern` options, to match any of the tokens used in the [file-naming conventions](#file-naming-conventions) section.
 
 - **`routeFilePrefix`**
   - (Optional) If set, only route files and directories that start with this string will be considered for routing.
@@ -158,11 +237,11 @@ The following options are available for configuration via the `tsr.config.json` 
 - **`experimental.enableCodeSplitting`** ⚠️
   - (Optional, **Defaults to `false`**)
   - If set to `true`, all non-critical route configuration items will be automatically code-split.
-  - See the [using automatic code-splitting](../code-splitting#using-automatic-code-splitting) guide.
+  - See the [using automatic code-splitting](./code-splitting.md#using-automatic-code-splitting) guide.
 
 ## File Naming Conventions
 
-File-based routing requires that you follow a few simple file naming conventions to ensure that your routes are generated correctly. The concepts these conventions enable are covered in detail in the [Route Trees & Nesting](../route-trees) guide.
+File-based routing requires that you follow a few simple file naming conventions to ensure that your routes are generated correctly. The concepts these conventions enable are covered in detail in the [Route Trees & Nesting](./route-trees.md) guide.
 
 > **💡 Remember:** The file-naming conventions for your project could be affected by what [options](#options) are configured in your `tsr.config.json`. By default, the `routeFileIgnorePrefix` option is set to `-`, as such files and directories starting with `-` will not be considered for routing.
 

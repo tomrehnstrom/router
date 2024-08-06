@@ -1,12 +1,11 @@
 import * as React from 'react'
-
-const useLayoutEffect =
-  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect
-
 import { useRouter } from './useRouter'
 import { functionalUpdate } from './utils'
 import type { ParsedLocation } from './location'
 import type { NonNullableUpdater } from './utils'
+
+const useLayoutEffect =
+  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect
 
 const windowKey = 'window'
 const delimiter = '___'
@@ -48,7 +47,15 @@ export type ScrollRestorationOptions = {
   getKey?: (location: ParsedLocation) => string
 }
 
-const defaultGetKey = (location: ParsedLocation) => location.state.key!
+/**
+ * The default `getKey` function for `useScrollRestoration`.
+ * It returns the `key` from the location state or the `href` of the location.
+ *
+ * The `location.href` is used as a fallback to support the use case where the location state is not available like the initial render.
+ */
+const defaultGetKey = (location: ParsedLocation) => {
+  return location.state.key! || location.href
+}
 
 export function useScrollRestoration(options?: ScrollRestorationOptions) {
   const router = useRouter()

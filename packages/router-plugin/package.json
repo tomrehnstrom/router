@@ -1,7 +1,7 @@
 {
   "name": "@tanstack/router-plugin",
-  "version": "1.39.5",
-  "description": "",
+  "version": "1.46.6",
+  "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",
   "license": "MIT",
   "repository": {
@@ -13,6 +13,31 @@
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/tannerlinsley"
+  },
+  "keywords": [
+    "react",
+    "location",
+    "router",
+    "routing",
+    "async",
+    "async router",
+    "typescript"
+  ],
+  "scripts": {
+    "clean": "rimraf ./dist && rimraf ./coverage",
+    "test": "pnpm test:eslint && pnpm test:types && pnpm test:build && pnpm test:unit",
+    "test:unit": "vitest",
+    "test:unit:dev": "vitest --watch",
+    "test:eslint": "eslint ./src",
+    "test:types": "pnpm run \"/^test:types:ts[0-9]{2}$/\"",
+    "test:types:ts50": "node ../../node_modules/typescript50/lib/tsc.js",
+    "test:types:ts51": "node ../../node_modules/typescript51/lib/tsc.js",
+    "test:types:ts52": "node ../../node_modules/typescript52/lib/tsc.js",
+    "test:types:ts53": "node ../../node_modules/typescript53/lib/tsc.js",
+    "test:types:ts54": "node ../../node_modules/typescript54/lib/tsc.js",
+    "test:types:ts55": "tsc",
+    "test:build": "publint --strict",
+    "build": "vite build"
   },
   "type": "module",
   "exports": {
@@ -36,58 +61,72 @@
         "default": "./dist/cjs/vite.cjs"
       }
     },
+    "./rspack": {
+      "import": {
+        "types": "./dist/esm/rspack.d.ts",
+        "default": "./dist/esm/rspack.js"
+      },
+      "require": {
+        "types": "./dist/cjs/rspack.d.cts",
+        "default": "./dist/cjs/rspack.cjs"
+      }
+    },
+    "./webpack": {
+      "import": {
+        "types": "./dist/esm/webpack.d.ts",
+        "default": "./dist/esm/webpack.js"
+      },
+      "require": {
+        "types": "./dist/cjs/webpack.d.cts",
+        "default": "./dist/cjs/webpack.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "sideEffects": false,
-  "scripts": {
-    "clean": "rimraf ./dist && rimraf ./coverage",
-    "test": "pnpm test:eslint && pnpm test:types && pnpm test:build && pnpm test:unit",
-    "test:unit": "vitest --typecheck --watch=false",
-    "test:eslint": "eslint --ext .ts,.tsx ./src",
-    "test:types": "tsc --noEmit",
-    "test:build": "publint --strict",
-    "build": "vite build"
-  },
-  "keywords": [
-    "react",
-    "location",
-    "router",
-    "routing",
-    "async",
-    "async router",
-    "typescript"
+  "files": [
+    "dist",
+    "src"
   ],
   "engines": {
     "node": ">=12"
   },
-  "files": [
-    "dist",
-    "src/**"
-  ],
-  "peerDependencies": {
-    "vite": ">=5"
-  },
-  "peerDependenciesMeta": {
-    "vite": {
-      "optional": true
-    }
-  },
   "dependencies": {
-    "@babel/core": "^7.23.7",
-    "@babel/generator": "^7.23.6",
-    "@babel/plugin-syntax-jsx": "^7.24.1",
-    "@babel/plugin-syntax-typescript": "^7.24.1",
-    "@babel/plugin-transform-react-jsx": "^7.23.4",
-    "@babel/plugin-transform-typescript": "^7.24.1",
-    "@babel/template": "^7.24.0",
-    "@babel/traverse": "^7.24.1",
-    "@babel/types": "^7.24.0",
+    "@babel/core": "^7.25.2",
+    "@babel/generator": "^7.25.0",
+    "@babel/parser": "^7.25.3",
+    "@babel/plugin-syntax-jsx": "^7.24.7",
+    "@babel/plugin-syntax-typescript": "^7.24.7",
+    "@babel/template": "^7.25.0",
+    "@babel/traverse": "^7.25.3",
+    "@babel/types": "^7.25.2",
     "@tanstack/router-generator": "workspace:^",
     "@types/babel__core": "^7.20.5",
     "@types/babel__generator": "^7.6.8",
     "@types/babel__template": "^7.4.4",
-    "@types/babel__traverse": "^7.20.5",
-    "unplugin": "^1.10.1",
-    "zod": "^3.22.4"
+    "@types/babel__traverse": "^7.20.6",
+    "babel-dead-code-elimination": "^1.0.6",
+    "chokidar": "^3.6.0",
+    "unplugin": "^1.11.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "vite": "^5.3.5"
+  },
+  "peerDependencies": {
+    "@rsbuild/core": ">=0.7.9",
+    "vite": ">=5.0.13",
+    "webpack": ">=5.92.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    },
+    "@rsbuild/core": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
   }
 }

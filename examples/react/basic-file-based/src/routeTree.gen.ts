@@ -17,7 +17,6 @@ import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts.index'
 import { Route as PostsPostIdImport } from './routes/posts.$postId'
 import { Route as LayoutLayout2Import } from './routes/_layout/_layout-2'
-import { Route as PostsPostIdDeepImport } from './routes/posts_.$postId.deep'
 import { Route as LayoutLayout2LayoutBImport } from './routes/_layout/_layout-2/layout-b'
 import { Route as LayoutLayout2LayoutAImport } from './routes/_layout/_layout-2/layout-a'
 
@@ -51,11 +50,6 @@ const PostsPostIdRoute = PostsPostIdImport.update({
 const LayoutLayout2Route = LayoutLayout2Import.update({
   id: '/_layout-2',
   getParentRoute: () => LayoutRoute,
-} as any)
-
-const PostsPostIdDeepRoute = PostsPostIdDeepImport.update({
-  path: '/posts/$postId/deep',
-  getParentRoute: () => rootRoute,
 } as any)
 
 const LayoutLayout2LayoutBRoute = LayoutLayout2LayoutBImport.update({
@@ -128,13 +122,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLayout2LayoutBImport
       parentRoute: typeof LayoutLayout2Import
     }
-    '/posts/$postId/deep': {
-      id: '/posts/$postId/deep'
-      path: '/posts/$postId/deep'
-      fullPath: '/posts/$postId/deep'
-      preLoaderRoute: typeof PostsPostIdDeepImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -149,7 +136,6 @@ export const routeTree = rootRoute.addChildren({
     }),
   }),
   PostsRoute: PostsRoute.addChildren({ PostsPostIdRoute, PostsIndexRoute }),
-  PostsPostIdDeepRoute,
 })
 
 /* prettier-ignore-end */
@@ -162,8 +148,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/_layout",
-        "/posts",
-        "/posts/$postId/deep"
+        "/posts"
       ]
     },
     "/": {
@@ -205,9 +190,6 @@ export const routeTree = rootRoute.addChildren({
     "/_layout/_layout-2/layout-b": {
       "filePath": "_layout/_layout-2/layout-b.tsx",
       "parent": "/_layout/_layout-2"
-    },
-    "/posts/$postId/deep": {
-      "filePath": "posts_.$postId.deep.tsx"
     }
   }
 }

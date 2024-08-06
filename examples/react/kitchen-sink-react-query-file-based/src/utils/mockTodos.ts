@@ -41,11 +41,11 @@ export interface Company {
   bs: string
 }
 
-let invoices: Invoice[] = null!
-let users: User[] = null!
+let invoices: Array<Invoice> = null!
+let users: Array<User> = null!
 
-let invoicesPromise: Promise<void>
-let usersPromise: Promise<void>
+let invoicesPromise: Promise<void> | undefined = undefined
+let usersPromise: Promise<void> | undefined = undefined
 
 const ensureInvoices = async () => {
   if (!invoicesPromise) {
@@ -92,7 +92,7 @@ export async function fetchInvoiceById(id: number) {
 export async function postInvoice(partialInvoice: Partial<Invoice>) {
   return actionDelayFn(() => {
     if (partialInvoice.title?.includes('error')) {
-      console.log('error')
+      console.error('error')
       throw new Error('Ouch!')
     }
     const invoice = {
@@ -119,10 +119,11 @@ export async function patchInvoice({
 }: PickAsRequired<Partial<Invoice>, 'id'>) {
   return actionDelayFn(() => {
     invoices = produce(invoices, (draft) => {
-      let invoice = draft.find((d) => d.id === id)
+      const invoice = draft.find((d) => d.id === id)
       if (!invoice) {
         throw new Error('Invoice not found.')
       }
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (updatedInvoice.title?.toLocaleLowerCase()?.includes('error')) {
         throw new Error('Ouch!')
       }

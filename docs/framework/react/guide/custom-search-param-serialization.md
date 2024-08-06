@@ -38,9 +38,12 @@ const router = createRouter({
 
 However, this default behavior may not be suitable for all use cases. For example, you may want to use a different serialization format, such as base64 encoding, or you may want to use a purpose-built serialization/deserialization library, like [query-string](https://github.com/sindresorhus/query-string), [JSURL2](https://github.com/wmertens/jsurl2), or [Zipson](https://jgranstrom.github.io/zipson/).
 
-This can be achieved by providing your own serialization and deserialization functions to the `parseSearch` and `stringifySearch` options in the [`Router`](../../api/router/RouterOptionsType#stringifysearch-method) configuration. When doing this, you can utilize TanStack Router's built-in helper functions, `parseSearchWith` and `stringifySearchWith`, to simplify the process.
+This can be achieved by providing your own serialization and deserialization functions to the `parseSearch` and `stringifySearch` options in the [`Router`](../api/router/RouterOptionsType.md#stringifysearch-method) configuration. When doing this, you can utilize TanStack Router's built-in helper functions, `parseSearchWith` and `stringifySearchWith`, to simplify the process.
 
-> 🧠 An important aspect of serialization and deserialization, is that you are able to get the same object back after deserialization. This is important because if the serialization and deserialization process is not done correctly, you may lose some information. For example, if you are using a library that does not support nested objects, you may lose the nested object when deserializing the search string.
+> [!TIP]
+> An important aspect of serialization and deserialization, is that you are able to get the same object back after deserialization. This is important because if the serialization and deserialization process is not done correctly, you may lose some information. For example, if you are using a library that does not support nested objects, you may lose the nested object when deserializing the search string.
+
+![Diagram showing idempotent nature of URL search param serialization and deserialization](https://raw.githubusercontent.com/TanStack/router/main/docs/assets/search-serialization-deserialization-idempotency.jpg)
 
 Here are some examples of how you can customize the search param serialization in TanStack Router:
 
@@ -156,11 +159,9 @@ import {
 import { stringify, parse } from 'zipson'
 
 const router = createRouter({
-  parseSearch: parseSearchWith((value) =>
-    parse(decodeURIComponent(decodeFromBinary(value))),
-  ),
+  parseSearch: parseSearchWith((value) => parse(decodeFromBinary(value))),
   stringifySearch: stringifySearchWith((value) =>
-    encodeToBinary(encodeURIComponent(stringify(value))),
+    encodeToBinary(stringify(value)),
   ),
 })
 

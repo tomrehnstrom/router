@@ -152,7 +152,7 @@ export function replaceEqualDeep<T>(prev: any, _next: T): T {
     let equalItems = 0
 
     for (let i = 0; i < nextSize; i++) {
-      const key = array ? i : nextItems[i]
+      const key = array ? i : (nextItems[i] as any)
       if (
         ((!array && prevItems.includes(key)) || array) &&
         prev[key] === undefined &&
@@ -205,7 +205,7 @@ function hasObjectPrototype(o: any) {
   return Object.prototype.toString.call(o) === '[object Object]'
 }
 
-export function isPlainArray(value: unknown) {
+export function isPlainArray(value: unknown): value is Array<unknown> {
   return Array.isArray(value) && value.length === Object.keys(value).length
 }
 
@@ -219,8 +219,8 @@ export function deepEqual(a: any, b: any, partial: boolean = false): boolean {
   }
 
   if (isPlainObject(a) && isPlainObject(b)) {
-    const aKeys = Object.keys(a)
-    const bKeys = Object.keys(b)
+    const aKeys = Object.keys(a).filter((key) => a[key] !== undefined)
+    const bKeys = Object.keys(b).filter((key) => b[key] !== undefined)
 
     if (!partial && aKeys.length !== bKeys.length) {
       return false
@@ -232,6 +232,9 @@ export function deepEqual(a: any, b: any, partial: boolean = false): boolean {
   }
 
   if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) {
+      return false
+    }
     return !a.some((item, index) => !deepEqual(item, b[index], partial))
   }
 
@@ -315,23 +318,25 @@ export type ControlledPromise<T> = Promise<T> & {
   resolve: (value: T) => void
   reject: (value: any) => void
   status: 'pending' | 'resolved' | 'rejected'
+  value?: T
 }
 
-export function createControlledPromise<T>(onResolve?: () => void) {
-  let resolveLoadPromise!: () => void
+export function createControlledPromise<T>(onResolve?: (value: T) => void) {
+  let resolveLoadPromise!: (value: T) => void
   let rejectLoadPromise!: (value: any) => void
 
-  const controlledPromise = new Promise<void>((resolve, reject) => {
+  const controlledPromise = new Promise<T>((resolve, reject) => {
     resolveLoadPromise = resolve
     rejectLoadPromise = reject
   }) as ControlledPromise<T>
 
   controlledPromise.status = 'pending'
 
-  controlledPromise.resolve = () => {
+  controlledPromise.resolve = (value: T) => {
     controlledPromise.status = 'resolved'
-    resolveLoadPromise()
-    onResolve?.()
+    controlledPromise.value = value
+    resolveLoadPromise(value)
+    onResolve?.(value)
   }
 
   controlledPromise.reject = (e) => {
@@ -366,4 +371,92 @@ export function usePrevious<T>(value: T): T | null {
 
   // return the previous value only
   return ref.current.prev
+}
+
+/**
+ * React hook to wrap `IntersectionObserver`.
+ *
+ * This hook will create an `IntersectionObserver` and observe the ref passed to it.
+ *
+ * When the intersection changes, the callback will be called with the `IntersectionObserverEntry`.
+ *
+ * @param ref - The ref to observe
+ * @param intersectionObserverOptions - The options to pass to the IntersectionObserver
+ * @param options - The options to pass to the hook
+ * @param callback - The callback to call when the intersection changes
+ * @returns The IntersectionObserver instance
+ * @example
+ * ```tsx
+ * const MyComponent = () => {
+ * const ref = React.useRef<HTMLDivElement>(null)
+ * useIntersectionObserver(
+ *  ref,
+ *  (entry) => { doSomething(entry) },
+ *  { rootMargin: '10px' },
+ *  { disabled: false }
+ * )
+ * return <div ref={ref} />
+ * ```
+ */
+export function useIntersectionObserver<T extends Element>(
+  ref: React.RefObject<T>,
+  callback: (entry: IntersectionObserverEntry | undefined) => void,
+  intersectionObserverOptions: IntersectionObserverInit = {},
+  options: { disabled?: boolean } = {},
+): IntersectionObserver | null {
+  const isIntersectionObserverAvailable = React.useRef(
+    typeof IntersectionObserver === 'function',
+  )
+
+  const observerRef = React.useRef<IntersectionObserver | null>(null)
+
+  React.useEffect(() => {
+    if (
+      !ref.current ||
+      !isIntersectionObserverAvailable.current ||
+      options.disabled
+    ) {
+      return
+    }
+
+    observerRef.current = new IntersectionObserver(([entry]) => {
+      callback(entry)
+    }, intersectionObserverOptions)
+
+    observerRef.current.observe(ref.current)
+
+    return () => {
+      observerRef.current?.disconnect()
+    }
+  }, [callback, intersectionObserverOptions, options.disabled, ref])
+
+  return observerRef.current
+}
+
+/**
+ * React hook to take a `React.ForwardedRef` and returns a `ref` that can be used on a DOM element.
+ *
+ * @param ref - The forwarded ref
+ * @returns The inner ref returned by `useRef`
+ * @example
+ * ```tsx
+ * const MyComponent = React.forwardRef((props, ref) => {
+ *  const innerRef = useForwardedRef(ref)
+ *  return <div ref={innerRef} />
+ * })
+ * ```
+ */
+export function useForwardedRef<T>(ref?: React.ForwardedRef<T>) {
+  const innerRef = React.useRef<T>(null)
+
+  React.useEffect(() => {
+    if (!ref) return
+    if (typeof ref === 'function') {
+      ref(innerRef.current)
+    } else {
+      ref.current = innerRef.current
+    }
+  })
+
+  return innerRef
 }

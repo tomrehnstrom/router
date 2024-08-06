@@ -1,5 +1,5 @@
-import path from 'path'
-import { existsSync, readFileSync } from 'fs'
+import path from 'node:path'
+import { existsSync, readFileSync } from 'node:fs'
 import { z } from 'zod'
 
 export const configSchema = z.object({
@@ -26,14 +26,19 @@ export const configSchema = z.object({
     .array(z.string())
     .optional()
     .default(['/* prettier-ignore-end */']),
+  experimental: z
+    .object({
+      enableCodeSplitting: z.boolean().optional(),
+    })
+    .optional(),
 })
 
 export type Config = z.infer<typeof configSchema>
 
-export async function getConfig(
+export function getConfig(
   inlineConfig: Partial<Config> = {},
   configDirectory?: string,
-): Promise<Config> {
+): Config {
   if (configDirectory === undefined) {
     configDirectory = process.cwd()
   }

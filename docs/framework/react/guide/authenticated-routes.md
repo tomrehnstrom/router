@@ -12,7 +12,7 @@ The `route.beforeLoad` option allows you to specify a function that will be call
 The `beforeLoad` function runs in relative order to these other route loading functions:
 
 - Route Matching (Top-Down)
-  - `route.parseParams`
+  - `route.params.parse`
   - `route.validateSearch`
 - Route Loading (including Preloading)
   - **`route.beforeLoad`**
@@ -48,7 +48,8 @@ export const Route = createFileRoute('/_authenticated')({
 })
 ```
 
-> 🧠 `redirect()` takes all of the same options as the `navigate` function, so you can pass options like `replace: true` if you want to replace the current history entry instead of adding a new one.
+> [!TIP]
+> The `redirect()` function takes all of the same options as the `navigate` function, so you can pass options like `replace: true` if you want to replace the current history entry instead of adding a new one.
 
 Once you have authenticated a user, it's also common practice to redirect them back to the page they were trying to access. To do this, you can utilize the `redirect` search param that we added in our original redirect. Since we'll be replacing the entire URL with what it was, `router.history.push` is better suited for this than `router.navigate`:
 
@@ -79,9 +80,10 @@ This keeps the user on the same page, but still allows you to render a login for
 
 If your authentication flow relies on interactions with React context and/or hooks, you'll need to pass down your authentication state to TanStack Router using `router.context` option.
 
-> 🧠 React hooks are not meant to be consumed outside of React components. If you need to use a hook outside of a React component, you need to extract the returned state from the hook in a component that wraps your `<RouterProvider />` and then pass the returned value down to TanStack Router.
+> [!IMPORTANT]
+> React hooks are not meant to be consumed outside of React components. If you need to use a hook outside of a React component, you need to extract the returned state from the hook in a component that wraps your `<RouterProvider />` and then pass the returned value down to TanStack Router.
 
-We'll cover the `router.context` options in-detail in the [Router Context](../router-context) section.
+We'll cover the `router.context` options in-detail in the [Router Context](./router-context.md) section.
 
 Here's an example that uses React context and hooks for protecting authenticated routes in TanStack Router. See the entire working setup in the [Authenticated Routes example](../../examples/authenticated-routes).
 
@@ -159,6 +161,6 @@ export const Route = createFileRoute('/dashboard')({
 })
 ```
 
-You can _optionally_, also use the [Non-Redirected Authentication](../authenticated-routes#non-redirected-authentication) approach to show a login form instead of calling a **redirect**.
+You can _optionally_, also use the [Non-Redirected Authentication](#non-redirected-authentication) approach to show a login form instead of calling a **redirect**.
 
 This approach can also be used in conjunction with Layout or Parent Routes to protect all routes under a specific layout.

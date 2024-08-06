@@ -4,14 +4,14 @@ title: Routing Concepts
 
 TanStack Router supports a number of powerful routing concepts that allow you to build complex and dynamic routing systems with ease.
 
-- [The Root Route](../routing-concepts#the-root-route)
-- [Static Routes](../routing-concepts#static-routes)
-- [Index Routes](../routing-concepts#index-routes)
-- [Dynamic Route Segments](../routing-concepts#dynamic-route-segments)
-- [Splat / Catch-All Routes](../routing-concepts#splat--catch-all-routes)
-- [Pathless / Layout Routes](../routing-concepts#pathless--layout-routes)
-- [Non-Nested Routes](../routing-concepts#non-nested-routes)
-- [Not-Found Routes](../routing-concepts#404--notfoundroutes)
+- [The Root Route](./routing-concepts.md#the-root-route)
+- [Static Routes](./routing-concepts.md#static-routes)
+- [Index Routes](./routing-concepts.md#index-routes)
+- [Dynamic Route Segments](./routing-concepts.md#dynamic-route-segments)
+- [Splat / Catch-All Routes](./routing-concept.md#splat--catch-all-routes)
+- [Pathless / Layout Routes](./routing-concepts.md#pathless--layout-routes)
+- [Non-Nested Routes](./routing-concepts.md#non-nested-routes)
+- [Not-Found Routes](./routing-concepts.md#404--notfoundroutes)
 
 Each of these concepts is useful and powerful, and we'll dive into each of them in the following sections.
 
@@ -38,7 +38,7 @@ import { createRootRoute } from '@tanstack/react-router'
 export const Route = createRootRoute()
 ```
 
-> 🧠 You can also create a root route via the `createRootRouteWithContext<TContext>()` function, which is a type-safe way of doing dependency injection for the entire router. Read more about this in the [Context Section](../router-context) -->
+> 🧠 You can also create a root route via the `createRootRouteWithContext<TContext>()` function, which is a type-safe way of doing dependency injection for the entire router. Read more about this in the [Context Section](./router-context.md) -->
 
 ## Anatomy of a Route
 
@@ -58,7 +58,7 @@ The `createFileRoute` function takes a single argument, the file-route's path as
 
 **❓❓❓ "Wait, you're making me pass the path of the route file to `createFileRoute`?"**
 
-Yes! But don't worry, this path is **automatically written and managed by the router for you via the Vite plugin or Router CLI.** So, as you create new routes, move routes around or rename routes, the path will be updated for you automatically.
+Yes! But don't worry, this path is **automatically written and managed by the router for you via the TanStack Router plugin or Router CLI.** So, as you create new routes, move routes around or rename routes, the path will be updated for you automatically.
 
 > 🧠 The reason for this pathname has everything to do with the magical type safety of TanStack Router. Without this pathname, TypeScript would have no idea what file we're in! (We wish TypeScript had a built-in for this, but they don't yet 🤷‍♂️)
 
@@ -104,7 +104,7 @@ In this example, the `posts.index.tsx` file is nested under the `posts` director
 
 ## Dynamic Route Segments
 
-Route path segments that start with a `$` followed by a label are dynamic and capture that section of the URL into the `params` object for use in your application. For example, a pathame of `/posts/123` would match the `/posts/$postId` route, and the `params` object would be `{ postId: '123' }`.
+Route path segments that start with a `$` followed by a label are dynamic and capture that section of the URL into the `params` object for use in your application. For example, a pathname of `/posts/123` would match the `/posts/$postId` route, and the `params` object would be `{ postId: '123' }`.
 
 These params are then usable in your route's configuration and components! Let's look at the `posts.$postId.tsx` route from our example route tree above:
 
@@ -233,4 +233,4 @@ They do however still have the ability to:
 - Configure `loader`s and `beforeLoad` hooks
 - Receive `data` and search params from the root route
 
-We'll cover how to configure a `NotFoundRoute` in the [Route Matching - Not-Found Routes](../route-matching#not-found-routes) guide.
+We'll cover how to configure a `NotFoundRoute` in the [Route Matching - Not-Found Routes](./route-matching.md#not-found-routes) guide.

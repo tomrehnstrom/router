@@ -16,15 +16,15 @@ An instance of the `Router` has the following properties and methods:
 
 ### `state` property
 
-- Type: [`RouterState`](../RouterStateType)
+- Type: [`RouterState`](./RouterStateType.md)
 - The current state of the router.
 
-> ⚠️⚠️⚠️ **`router.state` is always up to date, but NOT REACTIVE. If you use `router.state` in a component, the component will not re-render when the router state changes. To get a reactive version of the router state, use the `useRouterState` hook.**
+> ⚠️⚠️⚠️ **`router.state` is always up to date, but NOT REACTIVE. If you use `router.state` in a component, the component will not re-render when the router state changes. To get a reactive version of the router state, use the [`useRouterState`](./useRouterStateHook.md) hook.**
 
 ### `.subscribe` method
 
 - Type: `(eventType: TType, fn: ListenerFn<RouterEvents[TType]>) => (event: RouterEvent) => void`
-- Subscribes to a [`RouterEvent`](../RouterEventsType).
+- Subscribes to a [`RouterEvent`](./RouterEventsType.md).
 - Returns a function that can be used to unsubscribe from the event.
 - The callback provided to the returned function will be called with the event that was emitted.
 
@@ -93,12 +93,13 @@ Commits a new location object to the browser history.
     location: ParsedLocation & {
       replace?: boolean
       resetScroll?: boolean
+      ignoreBlocker?: boolean
     },
   ) => Promise<void>
   ```
 - Properties
   - `location`
-    - Type: [`ParsedLocation`](../ParsedLocationType)
+    - Type: [`ParsedLocation`](./ParsedLocationType.md)
     - Required
     - The location to commit to the browser history.
   - `replace`
@@ -111,6 +112,11 @@ Commits a new location object to the browser history.
     - Optional
     - Defaults to `true` so that the scroll position will be reset to 0,0 after the location is committed to the browser history.
     - If `false`, the scroll position will not be reset to 0,0 after the location is committed to history.
+  - `ignoreBlocker`
+    - Type: `boolean`
+    - Optional
+    - Defaults to `false`.
+    - If `true`, navigation will ignore any blockers that might prevent it.
 
 ### `.navigate` method
 

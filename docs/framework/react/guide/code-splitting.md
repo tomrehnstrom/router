@@ -57,7 +57,7 @@ For example, if you have a route file named `posts.tsx`, you would create a new 
 
 ## Using the `.lazy.tsx` suffix
 
-If you're using the recommended [File-Based Routing](../route-trees) approach, code splitting is **as easy as moving your code into a separate file with a `.lazy.tsx` suffix** and use the `createLazyFileRoute` function instead of the `FileRoute` class or `createFileRoute` function.
+If you're using the recommended [File-Based Routing](./route-trees.md) approach, code splitting is **as easy as moving your code into a separate file with a `.lazy.tsx` suffix** and use the `createLazyFileRoute` function instead of the `FileRoute` class or `createFileRoute` function.
 
 Here are the options currently supported by the `createLazyFileRoute` function:
 
@@ -178,11 +178,12 @@ Tada! 🎉
 
 ## Using automatic code-splitting
 
-> ⚠️ **Experimental:** This feature is experimental and currently in development. It is not recommended for production use.
+> [!WARNING]
+> This feature is experimental and currently in development. It is not recommended for production use.
 
 When using the `experimental.enableCodeSplitting` feature, TanStack Router will automatically code split your route files based on the non-critical route configuration mentioned above.
 
-The automatic code-splitting feature is **ONLY** available when you are using file-based routing with a bundler (e.g: Vite). This will **NOT** work if you are **only** using the CLI (`@tanstack/router-cli`).
+The automatic code-splitting feature is **ONLY** available when you are using file-based routing with one of our [supported bundlers](./file-based-routing.md#prerequisites). This will **NOT** work if you are **only** using the CLI (`@tanstack/router-cli`).
 
 To enable this feature, you can add the following to your `tsr.config.json`:
 
@@ -209,7 +210,7 @@ export const Route = createFileRoute('/posts')({
 
 ```tsx
 // src/routes/posts.lazy.tsx
-import { createLaztFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 
 export const Route = createLazyFileRoute('/posts')({
   component: Posts,
@@ -267,7 +268,7 @@ const postsRoute = createRoute({
 
 ## Data Loader Splitting
 
-> ⚠️ Splitting a data loader will incur 2 round trips to the server to retrieve the loader data. One round trip to load the loader code bundle itself and another to execute the loader code and retrieve the data. Do not proceed unless you are VERY sure that your loader is contributing the the bundle size enough to warrant these round trips.
+> ⚠️ Splitting a data loader will incur 2 round trips to the server to retrieve the loader data. One round trip to load the loader code bundle itself and another to execute the loader code and retrieve the data. Do not proceed unless you are VERY sure that your loader is contributing to the bundle size enough to warrant these round trips.
 
 You can code split your data loading logic using the Route's `loader` option. While this process makes it difficult to maintain type-safety with the parameters passed to your loader, you can always use the generic `LoaderContext` type to get most of the way there:
 

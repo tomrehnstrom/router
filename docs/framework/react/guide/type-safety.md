@@ -65,7 +65,7 @@ function PostsComponent() {
 
 Every hook and component that requires a context hint will have a `from` param where you can pass the ID or path of the route you are rendering within.
 
-> 🧠 Quick tip: If your component is code-split, you can use the [getRouteApi function](../code-splitting#manually-accessing-route-apis-in-other-files-with-the-routeapi-class) to avoid having to pass in the `Route.fullPath` to get access to the typed `useParams()` and `useSearch()` hooks.
+> 🧠 Quick tip: If your component is code-split, you can use the [getRouteApi function](./code-splitting.md#manually-accessing-route-apis-in-other-files-with-the-routeapi-class) to avoid having to pass in the `Route.fullPath` to get access to the typed `useParams()` and `useSearch()` hooks.
 
 ### What if I don't know the route? What if it's a shared component?
 
@@ -115,6 +115,45 @@ const router = createRouter({
 
 As your application scales, TypeScript check times will naturally increase. There are a few things to keep in mind when your application scales to keep your TS check times down.
 
+### Only infer types you need
+
+A great pattern with client side data caches (TanStack Query, etc.) is to prefetch data. For example with TanStack Query you might have a route which calls `queryClient.ensureQueryData` in a `loader`.
+
+```tsx
+export const Route = createFileRoute('/posts/$postId/deep')({
+  loader: ({ context: { queryClient }, params: { postId } }) =>
+    queryClient.ensureQueryData(postQueryOptions(postId)),
+  component: PostDeepComponent,
+})
+
+function PostDeepComponent() {
+  const params = Route.useParams()
+  const data = useSuspenseQuery(postQueryOptions(params.postId))
+
+  return <></>
+}
+```
+
+This may look fine and for small route trees and you may not notice any TS performance issues. However in this case TS has to infer the loader's return type, despite it never being used in your route. If the loader data is a complex type with many routes that prefetch in this manner, it can slow down editor performance. In this case, the change is quite simple and let typescript infer Promise<void>.
+
+```tsx
+export const Route = createFileRoute('/posts/$postId/deep')({
+  loader: async ({ context: { queryClient }, params: { postId } }) => {
+    await queryClient.ensureQueryData(postQueryOptions(postId))
+  },
+  component: PostDeepComponent,
+})
+
+function PostDeepComponent() {
+  const params = Route.useParams()
+  const data = useSuspenseQuery(postQueryOptions(params.postId))
+
+  return <></>
+}
+```
+
+This way the loader data is never inferred and it moves the inference out of the route tree to the first time you use `useSuspenseQuery`.
+
 ### Narrow to relevant routes as much as you possibly can
 
 Consider the following usage of `Link`
@@ -125,7 +164,7 @@ Consider the following usage of `Link`
 <Link search={{ page: 0 }} />
 ```
 
-**These examples are bad for TS performance**. That's because `search` resolves to a union of all `search` params for all routes and TS has to check whatever you pass to the `search` prop against this potentially big union. As your application grows, this check time will increase linearly to number of routes and search params. We have done our best to optimise for this case (TypeScript will typically do this work once and cache it) but the initial check against this large union is expensive. This also applies to `params` and other API's such as `useSearch`, `useParams`, `useNavigate` etc
+**These examples are bad for TS performance**. That's because `search` resolves to a union of all `search` params for all routes and TS has to check whatever you pass to the `search` prop against this potentially big union. As your application grows, this check time will increase linearly to number of routes and search params. We have done our best to optimize for this case (TypeScript will typically do this work once and cache it) but the initial check against this large union is expensive. This also applies to `params` and other API's such as `useSearch`, `useParams`, `useNavigate` etc
 
 Instead you should try to narrow to relevant routes with `from` or `to`
 
@@ -152,7 +191,7 @@ const from = '/posts'
 
 ### Consider using the object syntax of `addChildren`
 
-It's tyipcal of routes to have `params` `search`, `loaders` or `context` that can even reference external dependencies which are also heavy on TS inference. For such applications, using objects for creating the route tree can be more performant than tuples.
+It's typical of routes to have `params` `search`, `loaders` or `context` that can even reference external dependencies which are also heavy on TS inference. For such applications, using objects for creating the route tree can be more performant than tuples.
 
 `createChildren` also can accept an object. For large route trees with complex routes and external libraries, objects can be much faster for TS to type check as opposed to large tuples. The performance gains depend on your project, what external dependencies you have and how the types for those libraries are written
 

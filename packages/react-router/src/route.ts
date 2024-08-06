@@ -8,15 +8,15 @@ import { useSearch } from './useSearch'
 import { notFound } from './not-found'
 import { useNavigate } from './useNavigate'
 import { rootRouteId } from './root'
+import type * as React from 'react'
 import type { RootRouteId } from './root'
 import type { UseNavigateResult } from './useNavigate'
-import type * as React from 'react'
 import type { MakeRouteMatch, RouteMatch } from './Matches'
-import type { NavigateOptions, ParsePathParams, ToSubOptions } from './link'
+import type { NavigateOptions, ParsePathParams, ToMaskOptions } from './link'
 import type { ParsedLocation } from './location'
 import type { RouteById, RouteIds, RoutePaths } from './routeInfo'
 import type { AnyRouter, RegisteredRouter, Router } from './router'
-import type { Assign, Expand, IsAny, NoInfer, PickRequired } from './utils'
+import type { Assign, Expand, NoInfer, PickRequired } from './utils'
 import type { BuildLocationFn, NavigateFn } from './RouterProvider'
 import type { NotFoundError } from './not-found'
 import type { LazyRoute } from './fileRoute'
@@ -61,7 +61,7 @@ export type RouteOptions<
   TAllParams = TParams,
   TRouteContextReturn = RouteContext,
   TRouteContext = RouteContext,
-  TRouterContext = AnyContext,
+  TParentAllContext = AnyContext,
   TAllContext = AnyContext,
   TLoaderDeps extends Record<string, any> = {},
   TLoaderDataReturn = {},
@@ -76,8 +76,7 @@ export type RouteOptions<
   TParams,
   TAllParams,
   TRouteContextReturn,
-  TRouteContext,
-  TRouterContext,
+  TParentAllContext,
   TAllContext,
   TLoaderDeps,
   TLoaderDataReturn
@@ -92,73 +91,70 @@ export type RouteOptions<
     NoInfer<TLoaderDeps>
   >
 
-export type ParamsFallback<
-  TPath extends string,
-  TParams,
-> = unknown extends TParams ? Record<ParsePathParams<TPath>, string> : TParams
+export type ParseParamsFn<TPath extends string, TParams> = (
+  rawParams: Record<ParsePathParams<TPath>, string>,
+) => TParams extends Record<ParsePathParams<TPath>, any>
+  ? TParams
+  : Record<ParsePathParams<TPath>, any>
+
+export type StringifyParamsFn<TPath extends string, TParams> = (
+  params: TParams,
+) => Record<ParsePathParams<TPath>, string>
+
+export type ParamsOptions<TPath extends string, TParams> = {
+  params?: {
+    parse: ParseParamsFn<TPath, TParams>
+    stringify: StringifyParamsFn<TPath, TParams>
+  }
+
+  /** 
+  @deprecated Use params.parse instead
+  */
+  parseParams?: ParseParamsFn<TPath, TParams>
+
+  /** 
+  @deprecated Use params.stringify instead
+  */
+  stringifyParams?: StringifyParamsFn<TPath, TParams>
+}
+
+export interface FullSearchSchemaOption<TFullSearchSchema> {
+  search: TFullSearchSchema
+}
 
 export type FileBaseRouteOptions<
-  TParentRoute extends AnyRoute = AnyRoute,
   TPath extends string = string,
   TSearchSchemaInput = Record<string, unknown>,
   TSearchSchema = {},
   TFullSearchSchema = TSearchSchema,
   TParams = {},
-  TAllParams = ParamsFallback<TPath, TParams>,
+  TAllParams = {},
   TRouteContextReturn = RouteContext,
-  TRouteContext = RouteContext,
-  TRouterContext = AnyContext,
+  TParentAllContext = AnyContext,
   TAllContext = AnyContext,
   TLoaderDeps extends Record<string, any> = {},
   TLoaderDataReturn = {},
 > = {
-  validateSearch?: SearchSchemaValidator<TSearchSchemaInput, TSearchSchema>
+  validateSearch?:
+    | ((input: TSearchSchemaInput) => TSearchSchema)
+    | { parse: (input: TSearchSchemaInput) => TSearchSchema }
   shouldReload?:
     | boolean
     | ((
-        match: LoaderFnContext<
-          TAllParams,
-          TFullSearchSchema,
-          TAllContext,
-          TRouteContext
-        >,
+        match: LoaderFnContext<TAllParams, TFullSearchSchema, TAllContext>,
       ) => any)
   // This async function is called before a route is loaded.
   // If an error is thrown here, the route's loader will not be called.
   // If thrown during a navigation, the navigation will be cancelled and the error will be passed to the `onError` function.
   // If thrown during a preload event, the error will be logged to the console.
-  beforeLoad?: BeforeLoadFn<
-    TFullSearchSchema,
-    TParentRoute,
-    TAllParams,
-    TRouteContextReturn,
-    TRouterContext
-  >
-  loaderDeps?: (opts: { search: TFullSearchSchema }) => TLoaderDeps
-  loader?: RouteLoaderFn<
-    TAllParams,
-    NoInfer<TLoaderDeps>,
-    NoInfer<TAllContext>,
-    NoInfer<TRouteContext>,
-    TLoaderDataReturn
-  >
-} & (
-  | {
-      // Both or none
-      parseParams?: (
-        rawParams: IsAny<TPath, any, Record<ParsePathParams<TPath>, string>>,
-      ) => TParams extends Record<ParsePathParams<TPath>, any>
-        ? TParams
-        : 'parseParams must return an object'
-      stringifyParams?: (
-        params: NoInfer<ParamsFallback<TPath, TParams>>,
-      ) => Record<ParsePathParams<TPath>, string>
-    }
-  | {
-      stringifyParams?: never
-      parseParams?: never
-    }
-)
+  beforeLoad?: (
+    ctx: BeforeLoadContext<TFullSearchSchema, TAllParams, TParentAllContext>,
+  ) => Promise<TRouteContextReturn> | TRouteContextReturn | void
+  loaderDeps?: (opts: FullSearchSchemaOption<TFullSearchSchema>) => TLoaderDeps
+  loader?: (
+    ctx: LoaderFnContext<TAllParams, TLoaderDeps, TAllContext>,
+  ) => TLoaderDataReturn | Promise<TLoaderDataReturn>
+} & ParamsOptions<TPath, TParams>
 
 export type BaseRouteOptions<
   TParentRoute extends AnyRoute = AnyRoute,
@@ -168,16 +164,14 @@ export type BaseRouteOptions<
   TSearchSchema = {},
   TFullSearchSchema = TSearchSchema,
   TParams = {},
-  TAllParams = ParamsFallback<TPath, TParams>,
+  TAllParams = {},
   TRouteContextReturn = RouteContext,
-  TRouteContext = RouteContext,
-  TRouterContext = AnyContext,
+  TParentAllContext = AnyContext,
   TAllContext = AnyContext,
   TLoaderDeps extends Record<string, any> = {},
   TLoaderDataReturn = {},
 > = RoutePathOptions<TCustomId, TPath> &
   FileBaseRouteOptions<
-    TParentRoute,
     TPath,
     TSearchSchemaInput,
     TSearchSchema,
@@ -185,8 +179,7 @@ export type BaseRouteOptions<
     TParams,
     TAllParams,
     TRouteContextReturn,
-    TRouteContext,
-    TRouterContext,
+    TParentAllContext,
     TAllContext,
     TLoaderDeps,
     TLoaderDataReturn
@@ -194,27 +187,23 @@ export type BaseRouteOptions<
     getParentRoute: () => TParentRoute
   }
 
-type BeforeLoadFn<
-  in out TFullSearchSchema,
-  in out TParentRoute extends AnyRoute,
-  in out TAllParams,
-  TRouteContextReturn,
-  in out TRouterContext = AnyContext,
-  in out TContext = IsAny<TParentRoute['types']['allContext'], TRouterContext>,
-> = (opts: {
-  search: TFullSearchSchema
+export interface BeforeLoadContext<
+  TFullSearchSchema,
+  TAllParams,
+  TParentAllContext,
+> extends FullSearchSchemaOption<TFullSearchSchema> {
   abortController: AbortController
   preload: boolean
-  params: TAllParams
-  context: TContext
+  params: Expand<TAllParams>
+  context: TParentAllContext
   location: ParsedLocation
   /**
    * @deprecated Use `throw redirect({ to: '/somewhere' })` instead
    **/
   navigate: NavigateFn
-  buildLocation: BuildLocationFn<TParentRoute>
+  buildLocation: BuildLocationFn
   cause: 'preload' | 'enter' | 'stay'
-}) => Promise<TRouteContextReturn> | TRouteContextReturn | void
+}
 
 export type UpdatableRouteOptions<
   TRouteId,
@@ -265,6 +254,7 @@ export type UpdatableRouteOptions<
   onLeave?: (match: TRouteMatch) => void
   meta?: (ctx: {
     matches: Array<TRouteMatch>
+    match: TRouteMatch
     params: TAllParams
     loaderData: TLoaderData
   }) => Array<React.JSX.IntrinsicElements['meta']>
@@ -301,21 +291,6 @@ type LdJsonValue = LdJsonPrimitive | LdJsonObject | LdJsonArray
 
 export type RouteLinkEntry = {}
 
-export type ParseParamsOption<TPath extends string, TParams> = ParseParamsFn<
-  TPath,
-  TParams
->
-
-export type ParseParamsFn<TPath extends string, TParams> = (
-  rawParams: IsAny<TPath, any, Record<ParsePathParams<TPath>, string>>,
-) => TParams extends Record<ParsePathParams<TPath>, any>
-  ? TParams
-  : 'parseParams must return an object'
-
-export type ParseParamsObj<TPath extends string, TParams> = {
-  parse?: ParseParamsFn<TPath, TParams>
-}
-
 // The parse type here allows a zod schema to be passed directly to the validator
 export type SearchSchemaValidator<TInput, TReturn> =
   | SearchSchemaValidatorObj<TInput, TReturn>
@@ -333,23 +308,21 @@ export type RouteLoaderFn<
   in out TAllParams = {},
   in out TLoaderDeps extends Record<string, any> = {},
   in out TAllContext = AnyContext,
-  in out TRouteContext = AnyContext,
   TLoaderData = undefined,
 > = (
-  match: LoaderFnContext<TAllParams, TLoaderDeps, TAllContext, TRouteContext>,
-) => Promise<TLoaderData> | TLoaderData
+  match: LoaderFnContext<TAllParams, TLoaderDeps, TAllContext>,
+) => TLoaderData | Promise<TLoaderData>
 
 export interface LoaderFnContext<
   in out TAllParams = {},
   in out TLoaderDeps = {},
   in out TAllContext = AnyContext,
-  in out TRouteContext = AnyContext,
 > {
   abortController: AbortController
   preload: boolean
-  params: TAllParams
+  params: Expand<TAllParams>
   deps: TLoaderDeps
-  context: Assign<TAllContext, TRouteContext>
+  context: TAllContext
   location: ParsedLocation // Do not supply search schema here so as to demotivate people from trying to shortcut loaderDeps
   /**
    * @deprecated Use `throw redirect({ to: '/somewhere' })` instead
@@ -386,6 +359,22 @@ export type InferFullSearchSchemaInput<TRoute> = TRoute extends {
   ? TFullSearchSchemaInput
   : {}
 
+export type InferAllParams<TRoute> = TRoute extends {
+  types: {
+    allParams: infer TAllParams
+  }
+}
+  ? TAllParams
+  : {}
+
+export type InferAllContext<TRoute> = TRoute extends {
+  types: {
+    allContext: infer TAllContext
+  }
+}
+  ? TAllContext
+  : {}
+
 export type ResolveSearchSchemaUsed<TSearchSchemaInput, TSearchSchema> =
   TSearchSchemaInput extends SearchSchemaInput
     ? Omit<TSearchSchemaInput, keyof SearchSchemaInput>
@@ -394,16 +383,12 @@ export type ResolveSearchSchemaUsed<TSearchSchemaInput, TSearchSchema> =
 export type ResolveFullSearchSchema<
   TParentRoute extends AnyRoute,
   TSearchSchema,
-> = unknown extends TParentRoute
-  ? TSearchSchema
-  : Assign<TParentRoute['types']['fullSearchSchema'], TSearchSchema>
+> = Assign<InferFullSearchSchema<TParentRoute>, TSearchSchema>
 
 export type ResolveFullSearchSchemaInput<
   TParentRoute extends AnyRoute,
   TSearchSchemaUsed,
-> = unknown extends TParentRoute
-  ? TSearchSchemaUsed
-  : Assign<TParentRoute['types']['fullSearchSchemaInput'], TSearchSchemaUsed>
+> = Assign<InferFullSearchSchemaInput<TParentRoute>, TSearchSchemaUsed>
 
 export type ResolveRouteContext<TRouteContextReturn> = [
   TRouteContextReturn,
@@ -414,7 +399,7 @@ export type ResolveRouteContext<TRouteContextReturn> = [
 export type ResolveAllContext<
   TParentRoute extends AnyRoute,
   TRouteContext,
-> = Assign<IsAny<TParentRoute['types']['allContext'], {}>, TRouteContext>
+> = Assign<InferAllContext<TParentRoute>, TRouteContext>
 
 export type ResolveLoaderData<TLoaderDataReturn> = [TLoaderDataReturn] extends [
   never,
@@ -442,16 +427,35 @@ export interface AnyRoute
     any,
     any,
     any,
-    any,
     any
   > {}
+
+export type AnyRouteWithContext<TContext> = Route<
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  TContext,
+  any,
+  any,
+  any,
+  any
+>
 
 export type ResolveAllParamsFromParent<
   TParentRoute extends AnyRoute,
   TParams,
-> = unknown extends TParentRoute
-  ? TParams
-  : Assign<TParentRoute['types']['allParams'], TParams>
+> = Assign<InferAllParams<TParentRoute>, TParams>
 
 export type RouteConstraints = {
   TParentRoute: AnyRoute
@@ -595,11 +599,7 @@ export class Route<
   in out TAllParams = ResolveAllParamsFromParent<TParentRoute, TParams>,
   TRouteContextReturn = RouteContext,
   in out TRouteContext = ResolveRouteContext<TRouteContextReturn>,
-  in out TAllContext = Assign<
-    IsAny<TParentRoute['types']['allContext'], {}>,
-    TRouteContext
-  >,
-  in out TRouterContext = AnyContext,
+  in out TAllContext = ResolveAllContext<TParentRoute, TRouteContext>,
   in out TLoaderDeps extends Record<string, any> = {},
   TLoaderDataReturn = {},
   in out TLoaderData = ResolveLoaderData<TLoaderDataReturn>,
@@ -617,7 +617,7 @@ export class Route<
     TAllParams,
     TRouteContextReturn,
     TRouteContext,
-    TRouterContext,
+    InferAllContext<TParentRoute>,
     TAllContext,
     TLoaderDeps,
     TLoaderDataReturn,
@@ -638,6 +638,7 @@ export class Route<
   router?: AnyRouter
   rank!: number
   lazyFn?: () => Promise<LazyRoute<any>>
+  _lazyPromise?: Promise<void>
 
   /**
    * @deprecated Use the `createRoute` function instead.
@@ -654,7 +655,7 @@ export class Route<
       TAllParams,
       TRouteContextReturn,
       TRouteContext,
-      TRouterContext,
+      InferAllContext<TParentRoute>,
       TAllContext,
       TLoaderDeps,
       TLoaderDataReturn,
@@ -688,7 +689,6 @@ export class Route<
     routeContext: TRouteContext
     allContext: TAllContext
     children: TChildren
-    routerContext: TRouterContext
     loaderData: TLoaderData
     loaderDeps: TLoaderDeps
   }
@@ -708,7 +708,7 @@ export class Route<
           TAllParams,
           TRouteContextReturn,
           TRouteContext,
-          TRouterContext,
+          InferAllContext<TParentRoute>,
           TAllContext,
           TLoaderDeps,
           TLoaderDataReturn,
@@ -766,7 +766,7 @@ export class Route<
     this.to = fullPath as TrimPathRight<TFullPath>
   }
 
-  addChildren = <
+  addChildren<
     const TNewChildren extends
       | Record<string, AnyRoute>
       | ReadonlyArray<AnyRoute>,
@@ -788,12 +788,11 @@ export class Route<
     TRouteContextReturn,
     TRouteContext,
     TAllContext,
-    TRouterContext,
     TLoaderDeps,
     TLoaderDataReturn,
     TLoaderData,
     TNewChildren
-  > => {
+  > {
     this.children = (
       Array.isArray(children) ? children : Object.values(children)
     ) as any
@@ -801,13 +800,7 @@ export class Route<
   }
 
   updateLoader = <TNewLoaderData = unknown>(options: {
-    loader: RouteLoaderFn<
-      TAllParams,
-      TLoaderDeps,
-      TAllContext,
-      TRouteContext,
-      TNewLoaderData
-    >
+    loader: RouteLoaderFn<TAllParams, TLoaderDeps, TAllContext, TNewLoaderData>
   }) => {
     Object.assign(this.options, options)
     return this as unknown as Route<
@@ -826,7 +819,6 @@ export class Route<
       TRouteContextReturn,
       TRouteContext,
       TAllContext,
-      TRouterContext,
       TLoaderDeps,
       TNewLoaderData,
       TChildren
@@ -898,7 +890,7 @@ export class Route<
     return useLoaderData({ ...opts, from: this.id } as any)
   }
 
-  useNavigate = (): UseNavigateResult<string> => {
+  useNavigate = (): UseNavigateResult<TFullPath> => {
     return useNavigate({ from: this.id })
   }
 }
@@ -931,11 +923,7 @@ export function createRoute<
   TAllParams = ResolveAllParamsFromParent<TParentRoute, TParams>,
   TRouteContextReturn = RouteContext,
   TRouteContext = ResolveRouteContext<TRouteContextReturn>,
-  TAllContext = Assign<
-    IsAny<TParentRoute['types']['allContext'], {}>,
-    TRouteContext
-  >,
-  TRouterContext = AnyContext,
+  TAllContext = ResolveAllContext<TParentRoute, TRouteContext>,
   TLoaderDeps extends Record<string, any> = {},
   TLoaderDataReturn = {},
   TLoaderData = ResolveLoaderData<TLoaderDataReturn>,
@@ -952,7 +940,7 @@ export function createRoute<
     TAllParams,
     TRouteContextReturn,
     TRouteContext,
-    TRouterContext,
+    InferAllContext<TParentRoute>,
     TAllContext,
     TLoaderDeps,
     TLoaderDataReturn,
@@ -975,7 +963,6 @@ export function createRoute<
     TRouteContextReturn,
     TRouteContext,
     TAllContext,
-    TRouterContext,
     TLoaderDeps,
     TLoaderDataReturn,
     TLoaderData,
@@ -1006,7 +993,7 @@ export type RootRouteOptions<
     {}, // TAllParams
     TRouteContextReturn, // TRouteContextReturn
     TRouteContext, // TRouteContext
-    TRouterContext,
+    TRouterContext, // TParentAllContext
     Assign<TRouterContext, TRouteContext>, // TAllContext
     TLoaderDeps,
     TLoaderDataReturn, // TLoaderDataReturn,
@@ -1018,6 +1005,7 @@ export type RootRouteOptions<
   | 'caseSensitive'
   | 'parseParams'
   | 'stringifyParams'
+  | 'params'
 >
 
 export function createRootRouteWithContext<TRouterContext extends {}>() {
@@ -1074,6 +1062,7 @@ export class RootRoute<
   TLoaderDeps extends Record<string, any> = {},
   TLoaderDataReturn = {},
   in out TLoaderData = ResolveLoaderData<TLoaderDataReturn>,
+  TChildren = unknown,
 > extends Route<
   any, // TParentRoute
   '/', // TPath
@@ -1090,11 +1079,10 @@ export class RootRoute<
   TRouteContextReturn, // TRouteContextReturn
   TRouteContext, // TRouteContext
   Assign<TRouterContext, TRouteContext>, // TAllContext
-  TRouterContext, // TRouterContext
   TLoaderDeps,
   TLoaderDataReturn,
   TLoaderData,
-  any // TChildren
+  TChildren // TChildren
 > {
   /**
    * @deprecated `RootRoute` is now an internal implementation detail. Use `createRootRoute()` instead.
@@ -1112,6 +1100,27 @@ export class RootRoute<
     >,
   ) {
     super(options as any)
+  }
+
+  addChildren<
+    const TNewChildren extends
+      | Record<string, AnyRoute>
+      | ReadonlyArray<AnyRoute>,
+  >(
+    children: TNewChildren,
+  ): RootRoute<
+    TSearchSchemaInput,
+    TSearchSchema,
+    TSearchSchemaUsed,
+    TRouteContextReturn,
+    TRouteContext,
+    TRouterContext,
+    TLoaderDeps,
+    TLoaderDataReturn,
+    TLoaderData,
+    TNewChildren
+  > {
+    return super.addChildren(children)
   }
 }
 
@@ -1153,6 +1162,7 @@ export function createRootRoute<
     | 'caseSensitive'
     | 'parseParams'
     | 'stringifyParams'
+    | 'params'
   >,
 ) {
   return new RootRoute<
@@ -1223,7 +1233,7 @@ export function createRouteMask<
 >(
   opts: {
     routeTree: TRouteTree
-  } & ToSubOptions<Router<TRouteTree, 'never'>, TFrom, TTo>,
+  } & ToMaskOptions<Router<TRouteTree, 'never'>, TFrom, TTo>,
 ): RouteMask<TRouteTree> {
   return opts as any
 }
@@ -1277,7 +1287,6 @@ export class NotFoundRoute<
   TRouteContextReturn = AnyContext,
   TRouteContext = RouteContext,
   TAllContext = ResolveAllContext<TParentRoute, TRouteContext>,
-  TRouterContext = AnyContext,
   TLoaderDeps extends Record<string, any> = {},
   TLoaderDataReturn = {},
   TLoaderData = ResolveLoaderData<TLoaderDataReturn>,
@@ -1298,7 +1307,6 @@ export class NotFoundRoute<
   TRouteContextReturn,
   TRouteContext,
   TAllContext,
-  TRouterContext,
   TLoaderDeps,
   TLoaderDataReturn,
   TLoaderData,
@@ -1317,13 +1325,18 @@ export class NotFoundRoute<
         {},
         TRouteContextReturn,
         TRouteContext,
-        TRouterContext,
+        InferAllContext<TParentRoute>,
         TAllContext,
         TLoaderDeps,
         TLoaderDataReturn,
         TLoaderData
       >,
-      'caseSensitive' | 'parseParams' | 'stringifyParams' | 'path' | 'id'
+      | 'caseSensitive'
+      | 'parseParams'
+      | 'stringifyParams'
+      | 'path'
+      | 'id'
+      | 'params'
     >,
   ) {
     super({

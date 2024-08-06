@@ -1,20 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import * as React from 'react'
 import { Matches } from './Matches'
 import { getRouterContext } from './routerContext'
 import type { NavigateOptions, ToOptions } from './link'
 import type { ParsedLocation } from './location'
-import type { AnyRoute } from './route'
 import type { RoutePaths } from './routeInfo'
 import type {
   AnyRouter,
   RegisteredRouter,
   Router,
   RouterOptions,
-  RouterState,
 } from './router'
-
-import type { MakeRouteMatch } from './Matches'
 
 export interface CommitLocationOptions {
   replace?: boolean
@@ -24,6 +19,7 @@ export interface CommitLocationOptions {
    * @deprecated All navigations use React transitions under the hood now
    **/
   startTransition?: boolean
+  ignoreBlocker?: boolean
 }
 
 export interface MatchLocation {
@@ -45,19 +41,14 @@ export type NavigateFn = <
   },
 ) => Promise<void>
 
-export type BuildLocationFn<TRouteTree extends AnyRoute> = <
+export type BuildLocationFn = <
   TTo extends string,
-  TFrom extends RoutePaths<TRouteTree> | string = string,
-  TMaskFrom extends RoutePaths<TRouteTree> | string = TFrom,
+  TRouter extends AnyRouter = RegisteredRouter,
+  TFrom extends RoutePaths<TRouter['routeTree']> | string = string,
+  TMaskFrom extends RoutePaths<TRouter['routeTree']> | string = TFrom,
   TMaskTo extends string = '',
 >(
-  opts: ToOptions<
-    Router<TRouteTree, 'never'>,
-    TFrom,
-    TTo,
-    TMaskFrom,
-    TMaskTo
-  > & {
+  opts: ToOptions<TRouter, TFrom, TTo, TMaskFrom, TMaskTo> & {
     leaveParams?: boolean
   },
 ) => ParsedLocation
@@ -106,17 +97,6 @@ export function RouterProvider<
       <Matches />
     </RouterContextProvider>
   )
-}
-
-export function getRouteMatch<TRouteTree extends AnyRoute>(
-  state: RouterState<TRouteTree>,
-  id: string,
-): undefined | MakeRouteMatch<TRouteTree> {
-  return [
-    ...state.cachedMatches,
-    ...(state.pendingMatches ?? []),
-    ...state.matches,
-  ].find((d) => d.id === id)
 }
 
 export type RouterProps<

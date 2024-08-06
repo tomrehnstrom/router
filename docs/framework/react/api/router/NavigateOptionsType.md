@@ -9,7 +9,8 @@ The `NavigateOptions` type is used to describe the options that can be used when
 type NavigateOptions = ToOptions & {
   replace?: boolean
   resetScroll?: boolean
+  ignoreBlocker?: boolean
 }
 ```
 
-- [`ToOptions`](../ToOptionsType)
+- [`ToOptions`](./ToOptionsType.md)

@@ -5,14 +5,19 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: () => {
-    return <p>This is the notFoundComponent configured on root route</p>
+    return (
+      <div>
+        <p>This is the notFoundComponent configured on root route</p>
+        <Link to="/">Start Over</Link>
+      </div>
+    )
   },
 })
 
 function RootComponent() {
   return (
     <>
-      <div className="p-2 flex gap-2 text-lg">
+      <div className="p-2 flex gap-2 text-lg border-b">
         <Link
           to="/"
           activeProps={{
@@ -29,7 +34,7 @@ function RootComponent() {
           }}
         >
           Posts
-        </Link>
+        </Link>{' '}
         <Link
           to="/layout-a"
           activeProps={{
@@ -37,7 +42,7 @@ function RootComponent() {
           }}
         >
           Layout
-        </Link>
+        </Link>{' '}
         <Link
           // @ts-expect-error
           to="/this-route-does-not-exist"

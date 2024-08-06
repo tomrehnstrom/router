@@ -3,7 +3,8 @@ id: external-data-loading
 title: External Data Loading
 ---
 
-> ⚠️ This guide is geared towards external state management libraries and their integration with TanStack Router for data fetching, ssr, hydration/dehydration and streaming. If you haven't read the standard [Data Loading](../data-loading) guide
+> [!IMPORTANT]
+> This guide is geared towards external state management libraries and their integration with TanStack Router for data fetching, ssr, hydration/dehydration and streaming. If you haven't read the standard [Data Loading](./data-loading.md) guide, please do so first.
 
 ## To **Store** or to **Coordinate**?
 
@@ -122,9 +123,7 @@ export const Route = createFileRoute('/posts')({
         {error.message}
         <button
           onClick={() => {
-            // Reset the router error boundary
-            reset()
-            // Invalidate the route to reload the loader
+            // Invalidate the route to reload the loader, and reset any router error boundaries
             router.invalidate()
           }}
         >
@@ -166,8 +165,8 @@ export function createRouter() {
     context: {
       queryClient,
     },
-    // On the server, dehydrate the loader client and return it
-    // to the router to get injected into `<DehydrateRouter />`
+    // On the server, dehydrate the loader client so the router
+    // can serialize it and send it to the client for us
     dehydrate: () => {
       return {
         queryClientState: dehydrate(queryClient),

@@ -2,14 +2,19 @@
 // This implementation attempts to be more lightweight by
 // making assumptions about the way TanStack Router works
 
+export interface NavigateOptions {
+  ignoreBlocker?: boolean
+}
+
 export interface RouterHistory {
   location: HistoryLocation
+  subscribers: Set<() => void>
   subscribe: (cb: () => void) => () => void
-  push: (path: string, state?: any) => void
-  replace: (path: string, state?: any) => void
-  go: (index: number) => void
-  back: () => void
-  forward: () => void
+  push: (path: string, state?: any, navigateOpts?: NavigateOptions) => void
+  replace: (path: string, state?: any, navigateOpts?: NavigateOptions) => void
+  go: (index: number, navigateOpts?: NavigateOptions) => void
+  back: (navigateOpts?: NavigateOptions) => void
+  forward: (navigateOpts?: NavigateOptions) => void
   createHref: (href: string) => string
   block: (blocker: BlockerFn) => () => void
   flush: () => void
@@ -48,6 +53,7 @@ export type BlockerFn = (
 type TryNavigateArgs = {
   task: () => void
   type: HistoryAction
+  navigateOpts?: NavigateOptions
 } & (
   | {
       type: 'PUSH' | 'REPLACE'
@@ -65,7 +71,7 @@ const beforeUnloadEvent = 'beforeunload'
 
 const beforeUnloadListener = (event: Event) => {
   event.preventDefault()
-  // @ts-ignore
+  // @ts-expect-error
   return (event.returnValue = '')
 }
 
@@ -97,7 +103,16 @@ export function createHistory(opts: {
     subscribers.forEach((subscriber) => subscriber())
   }
 
-  const tryNavigation = async ({ task, ...actionInfo }: TryNavigateArgs) => {
+  const tryNavigation = async ({
+    task,
+    navigateOpts,
+    ...actionInfo
+  }: TryNavigateArgs) => {
+    const ignoreBlocker = navigateOpts?.ignoreBlocker ?? false
+    if (ignoreBlocker) {
+      task()
+      return
+    }
     if (
       typeof document !== 'undefined' &&
       blockers.length &&
@@ -124,6 +139,7 @@ export function createHistory(opts: {
     get location() {
       return location
     },
+    subscribers,
     subscribe: (cb: () => void) => {
       subscribers.add(cb)
 
@@ -131,55 +147,59 @@ export function createHistory(opts: {
         subscribers.delete(cb)
       }
     },
-    push: (path: string, state: any) => {
+    push: (path, state, navigateOpts) => {
       state = assignKey(state)
-      console.log('TRY NAVIGATION')
       tryNavigation({
         task: () => {
           opts.pushState(path, state)
           notify()
         },
+        navigateOpts,
         type: 'PUSH',
         path,
         state,
       })
     },
-    replace: (path: string, state: any) => {
+    replace: (path, state, navigateOpts) => {
       state = assignKey(state)
       tryNavigation({
         task: () => {
           opts.replaceState(path, state)
           notify()
         },
+        navigateOpts,
         type: 'REPLACE',
         path,
         state,
       })
     },
-    go: (index) => {
+    go: (index, navigateOpts) => {
       tryNavigation({
         task: () => {
           opts.go(index)
           notify()
         },
+        navigateOpts,
         type: 'POP',
       })
     },
-    back: () => {
+    back: (navigateOpts) => {
       tryNavigation({
         task: () => {
           opts.back()
           notify()
         },
+        navigateOpts,
         type: 'POP',
       })
     },
-    forward: () => {
+    forward: (navigateOpts) => {
       tryNavigation({
         task: () => {
           opts.forward()
           notify()
         },
+        navigateOpts,
         type: 'POP',
       })
     },
@@ -316,6 +336,10 @@ export function createBrowserHistory(opts?: {
     }
 
     if (!scheduled) {
+      if (process.env.NODE_ENV === 'test') {
+        flush()
+        return
+      }
       // Schedule an update to the browser history
       scheduled = Promise.resolve().then(() => flush())
     }
@@ -434,6 +458,11 @@ export function createMemoryHistory(
 
     pushState: (path, state) => {
       currentState = state
+      entries.splice
+      // Removes all subsequent entries after the current index to start a new branch
+      if (index < entries.length - 1) {
+        entries.splice(index + 1)
+      }
       entries.push(path)
       index = Math.max(entries.length - 1, 0)
     },
@@ -443,7 +472,7 @@ export function createMemoryHistory(
     },
     back: () => {
       currentState = assignKey(currentState)
-      index--
+      index = Math.max(index - 1, 0)
     },
     forward: () => {
       currentState = assignKey(currentState)

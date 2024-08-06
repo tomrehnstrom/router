@@ -58,16 +58,27 @@ The `RouteOptions` type accepts an object with the following properties:
 - A function that will be called when this route is matched and passed the raw search params from the current location and return valid parsed search params. If this function throws, the route will be put into an error state and the error will be thrown during render. If this function does not throw, its return value will be used as the route's search params and the return type will be inferred into the rest of the router.
 - Optionally, the parameter type can be tagged with the `SearchSchemaInput` type like this: `(searchParams: TSearchSchemaInput & SearchSchemaInput) => TSearchSchema`. If this tag is present, `TSearchSchemaInput` will be used to type the `search` property of `<Link />` and `navigate()` **instead of** `TSearchSchema`. The difference between `TSearchSchemaInput` and `TSearchSchema` can be useful, for example, to express optional search parameters.
 
-### `parseParams` method
+### `parseParams` method (⚠️ deprecated)
 
 - Type: `(rawParams: Record<string, string>) => TParams`
 - Optional
 - A function that will be called when this route is matched and passed the raw params from the current location and return valid parsed params. If this function throws, the route will be put into an error state and the error will be thrown during render. If this function does not throw, its return value will be used as the route's params and the return type will be inferred into the rest of the router.
 
-### `stringifyParams` method
+### `stringifyParams` method (⚠️ deprecated)
 
 - Type: `(params: TParams) => Record<string, string>`
 - Required if `parseParams` is provided
+- A function that will be called when this routes parsed params are being used to build a location. This function should return a valid object of `Record<string, string>` mapping.
+
+### `params.parse` method
+
+- Type: `(rawParams: Record<string, string>) => TParams`
+- Optional
+- A function that will be called when this route is matched and passed the raw params from the current location and return valid parsed params. If this function throws, the route will be put into an error state and the error will be thrown during render. If this function does not throw, its return value will be used as the route's params and the return type will be inferred into the rest of the router.
+
+### `params.stringify` method
+
+- Type: `(params: TParams) => Record<string, string>`
 - A function that will be called when this routes parsed params are being used to build a location. This function should return a valid object of `Record<string, string>` mapping.
 
 ### `beforeLoad` method
@@ -91,13 +102,13 @@ type beforeLoad = (
 ```
 
 - Optional
-- [`ParsedLocation`](../ParsedLocationType)
+- [`ParsedLocation`](./ParsedLocationType.md)
 - This async function is called before a route is loaded. If an error is thrown here, the route's loader will not be called and the route will not render. If thrown during a navigation, the navigation will be cancelled and the error will be passed to the `onError` function. If thrown during a preload event, the error will be logged to the console and the preload will fail.
 - If this function returns a promise, the route will be put into a pending state and cause rendering to suspend until the promise resolves. If this routes pendingMs threshold is reached, the `pendingComponent` will be shown until it resolved. If the promise rejects, the route will be put into an error state and the error will be thrown during render.
 - If this function returns a `TRouteContext` object, that object will be merged into the route's context and be made available in the `loader` and other related route components/methods.
 - It's common to use this function to check if a user is authenticated and redirect them to a login page if they are not. To do this, you can either return or throw a `redirect` object from this function.
 
-> 🚧 `opts.navigate` has been deprecated and will be removed in the next major release. Use `throw redirect({ to: '/somewhere' })` instead. Read more about the `redirect` function [here](../redirectFunction).
+> 🚧 `opts.navigate` has been deprecated and will be removed in the next major release. Use `throw redirect({ to: '/somewhere' })` instead. Read more about the `redirect` function [here](./redirectFunction.md).
 
 ### `loader` method
 
@@ -120,30 +131,25 @@ type loader = (
 ```
 
 - Optional
-- [`ParsedLocation`](../ParsedLocationType)
+- [`ParsedLocation`](./ParsedLocationType.md)
 - This async function is called when a route is matched and passed the route's match object. If an error is thrown here, the route will be put into an error state and the error will be thrown during render. If thrown during a navigation, the navigation will be cancelled and the error will be passed to the `onError` function. If thrown during a preload event, the error will be logged to the console and the preload will fail.
 - If this function returns a promise, the route will be put into a pending state and cause rendering to suspend until the promise resolves. If this routes pendingMs threshold is reached, the `pendingComponent` will be shown until it resolved. If the promise rejects, the route will be put into an error state and the error will be thrown during render.
 - If this function returns a `TLoaderData` object, that object will be stored on the route match until the route match is no longer active. It can be accessed using the `useLoaderData` hook in any component that is a child of the route match before another `<Outlet />` is rendered.
 
-> 🚧 `opts.navigate` has been deprecated and will be removed in the next major release. Use `throw redirect({ to: '/somewhere' })` instead. Read more about the `redirect` function [here](../redirectFunction).
+> 🚧 `opts.navigate` has been deprecated and will be removed in the next major release. Use `throw redirect({ to: '/somewhere' })` instead. Read more about the `redirect` function [here](./redirectFunction.md).
 
 ### `loaderDeps` method
 
 - Type:
 
 ```tsx
-type loaderDeps = (opts: {
-  search: TFullSearchSchema
-  location: ParsedLocation
-  context: TAllContext
-}) => Record<string, any>
+type loaderDeps = (opts: { search: TFullSearchSchema }) => Record<string, any>
 ```
 
 - Optional
-- [`ParsedLocation`](../ParsedLocationType)
 - A function that will be called before this route is matched to provide additional unique identification to the route match and serve as a dependency tracker for when the match should be reloaded. It should return any serializable value that can uniquely identify the route match from navigation to navigation.
 - By default, path params are already used to uniquely identify a route match, so it's unnecessary to return these here.
-- If your route match relies on search params or context values for unique identification, it's required that you return them here so they can be made available in the `loader`'s `deps` argument.
+- If your route match relies on search params for unique identification, it's required that you return them here so they can be made available in the `loader`'s `deps` argument.
 
 ### `staleTime` property
 

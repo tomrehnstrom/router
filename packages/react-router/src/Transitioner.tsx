@@ -2,6 +2,7 @@ import * as React from 'react'
 import { pick, useLayoutEffect, usePrevious } from './utils'
 import { useRouter } from './useRouter'
 import { useRouterState } from './useRouterState'
+import { trimPathRight } from './path'
 
 export function Transitioner() {
   const router = useRouter()
@@ -40,7 +41,10 @@ export function Transitioner() {
       state: true,
     })
 
-    if (router.state.location.href !== nextLocation.href) {
+    if (
+      trimPathRight(router.latestLocation.href) !==
+      trimPathRight(nextLocation.href)
+    ) {
       router.commitLocation({ ...nextLocation, replace: true })
     }
 
@@ -52,7 +56,7 @@ export function Transitioner() {
   // Try to load the initial location
   useLayoutEffect(() => {
     if (
-      window.__TSR_DEHYDRATED__ ||
+      window.__TSR__?.dehydrated ||
       (mountLoadForRouter.current.router === router &&
         mountLoadForRouter.current.mounted)
     ) {

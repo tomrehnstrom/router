@@ -5,13 +5,21 @@ import {
   createRootRouteWithContext,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import { QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import type { QueryClient } from '@tanstack/react-query'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
 }>()({
   component: RootComponent,
+  notFoundComponent: () => {
+    return (
+      <div>
+        <p>This is the notFoundComponent configured on root route</p>
+        <Link to="/">Start Over</Link>
+      </div>
+    )
+  },
 })
 
 function RootComponent() {
@@ -42,6 +50,15 @@ function RootComponent() {
           }}
         >
           Layout
+        </Link>{' '}
+        <Link
+          // @ts-expect-error
+          to="/this-route-does-not-exist"
+          activeProps={{
+            className: 'font-bold',
+          }}
+        >
+          This Route Does Not Exist
         </Link>
       </div>
       <hr />

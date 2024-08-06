@@ -1023,6 +1023,7 @@ const stylesFactory = (shadowDOMTarget?: ShadowRoot) => {
       padding: ${tokens.size[1.5]} ${tokens.size[2]};
       display: flex;
       align-items: center;
+      justify-content: space-between;
       font-size: ${font.size.xs};
     `,
     routeMatchesToggle: css`
@@ -1097,7 +1098,9 @@ const stylesFactory = (shadowDOMTarget?: ShadowRoot) => {
 
       return classes
     },
-    matchIndicator: (color: 'green' | 'red' | 'yellow' | 'gray' | 'blue') => {
+    matchIndicator: (
+      color: 'green' | 'red' | 'yellow' | 'gray' | 'blue' | 'purple',
+    ) => {
       const base = css`
         flex: 0 0 auto;
         width: ${size[3]};

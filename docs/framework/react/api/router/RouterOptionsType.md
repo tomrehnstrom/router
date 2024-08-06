@@ -37,11 +37,12 @@ The `RouterOptions` type accepts an object with the following properties and met
 
 ### `defaultPreload` property
 
-- Type: `undefined | false | 'intent'`
+- Type: `undefined | false | 'intent' | 'viewport'`
 - Optional
 - Defaults to `false`
 - If `false`, routes will not be preloaded by default in any way.
 - If `'intent'`, routes will be preloaded by default when the user hovers over a link or a `touchstart` event is detected on a `<Link>`.
+- If `'viewport'`, routes will be preloaded by default when they are within the viewport of the browser.
 
 ### `defaultPreloadDelay` property
 
@@ -142,7 +143,7 @@ The `RouterOptions` type accepts an object with the following properties and met
 ### `context` property
 
 - Type: `any`
-- Optional or required if the root route was created with [`createRootRouteWithContext()`](../createRootRouteWithContextFunction).
+- Optional or required if the root route was created with [`createRootRouteWithContext()`](./createRootRouteWithContextFunction.md).
 - The root context that will be provided to all routes in the route tree. This can be used to provide a context to all routes in the tree without having to provide it to each route individually.
 
 ### `dehydrate` method
@@ -174,9 +175,8 @@ The `RouterOptions` type accepts an object with the following properties and met
 
 - Type: `React.Component`
 - Optional
-- A component that will be used to wrap the entire router. This is useful for providing a context to the entire router.
-
-**Example**
+- A component that will be used to wrap the entire router. This is useful for providing a context to the entire router. Only non-DOM-rendering components like providers should be used, anything else will cause a hydration error.
+  **Example**
 
 ```tsx
 import { createRouter } from '@tanstack/react-router'
@@ -193,7 +193,7 @@ const router = createRouter({
 
 - Type: `React.Component`
 - Optional
-- A component that will be used to wrap the inner contents of the router. This is useful for providing a context to the inner contents of the router where you also need access to the router context and hooks.
+- A component that will be used to wrap the inner contents of the router. This is useful for providing a context to the inner contents of the router where you also need access to the router context and hooks. Only non-DOM-rendering components like providers should be used, anything else will cause a hydration error.
 
 **Example**
 
@@ -222,7 +222,7 @@ const router = createRouter({
 
 ### `errorSerializer` property
 
-- Type: [`RouterErrorSerializer`](../RouterErrorSerializerType)
+- Type: [`RouterErrorSerializer`]
 - Optional
 - The serializer object that will be used to determine how errors are serialized and deserialized between the server and the client.
 
@@ -241,6 +241,7 @@ const router = createRouter({
 - Type: `RouterTransformer`
 - Optional
 - The transformer that will be used when sending data between the server and the client during SSR.
+- Defaults to a very lightweight transformer that supports a few basic types. See the [SSR guide](../../guide/ssr.md) for more information.
 
 #### `transformer.stringify` method
 

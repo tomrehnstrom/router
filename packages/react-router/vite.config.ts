@@ -1,20 +1,23 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
-import { tanstackBuildConfig } from '@tanstack/config/build'
+import { tanstackViteConfig } from '@tanstack/config/vite'
 import react from '@vitejs/plugin-react'
+import packageJson from './package.json'
 
 const config = defineConfig({
   plugins: [react()],
   test: {
-    globals: true,
-    name: 'react-router',
+    name: packageJson.name,
+    dir: './tests',
     watch: false,
     environment: 'jsdom',
+    typecheck: { enabled: true },
+    setupFiles: ['./tests/setupTests.tsx'],
   },
 })
 
 export default mergeConfig(
   config,
-  tanstackBuildConfig({
+  tanstackViteConfig({
     entry: './src/index.tsx',
     srcDir: './src',
   }),

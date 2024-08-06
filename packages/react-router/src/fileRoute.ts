@@ -6,6 +6,7 @@ import { useLoaderData } from './useLoaderData'
 import { useSearch } from './useSearch'
 import { useParams } from './useParams'
 import { useNavigate } from './useNavigate'
+import type { NoInfer } from '@tanstack/react-store'
 import type { ParsePathParams } from './link'
 import type {
   AnyContext,
@@ -13,6 +14,7 @@ import type {
   AnyRoute,
   AnySearchSchema,
   FileBaseRouteOptions,
+  InferAllContext,
   ResolveAllContext,
   ResolveAllParamsFromParent,
   ResolveFullSearchSchema,
@@ -24,16 +26,11 @@ import type {
   RouteConstraints,
   RouteContext,
   RouteLoaderFn,
-  SearchSchemaInput,
-  TrimPathLeft,
   UpdatableRouteOptions,
 } from './route'
-import type { Assign, IsAny } from './utils'
 import type { MakeRouteMatch } from './Matches'
-import type { NoInfer } from '@tanstack/react-store'
 import type { RegisteredRouter } from './router'
 import type { RouteById, RouteIds } from './routeInfo'
-import type { RootRouteId } from './root'
 
 export interface FileRoutesByPath {
   // '/': {
@@ -48,7 +45,9 @@ export function createFileRoute<
   TPath extends RouteConstraints['TPath'] = FileRoutesByPath[TFilePath]['path'],
   TFullPath extends
     RouteConstraints['TFullPath'] = FileRoutesByPath[TFilePath]['fullPath'],
->(path: TFilePath) {
+>(
+  path: TFilePath,
+): FileRoute<TFilePath, TParentRoute, TId, TPath, TFullPath>['createRoute'] {
   return new FileRoute<TFilePath, TParentRoute, TId, TPath, TFullPath>(path, {
     silent: true,
   }).createRoute
@@ -92,14 +91,12 @@ export class FileRoute<
     TRouteContextReturn = RouteContext,
     TRouteContext = ResolveRouteContext<TRouteContextReturn>,
     TAllContext = ResolveAllContext<TParentRoute, TRouteContext>,
-    TRouterContext = AnyContext,
     TLoaderDeps extends Record<string, any> = {},
     TLoaderDataReturn = {},
     TLoaderData = ResolveLoaderData<TLoaderDataReturn>,
     TChildren = unknown,
   >(
     options?: FileBaseRouteOptions<
-      TParentRoute,
       TPath,
       TSearchSchemaInput,
       TSearchSchema,
@@ -107,8 +104,7 @@ export class FileRoute<
       TParams,
       TAllParams,
       TRouteContextReturn,
-      TRouteContext,
-      TRouterContext,
+      InferAllContext<TParentRoute>,
       TAllContext,
       TLoaderDeps,
       TLoaderDataReturn
@@ -138,7 +134,6 @@ export class FileRoute<
     TRouteContextReturn,
     TRouteContext,
     TAllContext,
-    TRouterContext,
     TLoaderDeps,
     TLoaderDataReturn,
     TLoaderData,
@@ -169,14 +164,12 @@ export function FileRouteLoader<
     TRoute['types']['allParams'],
     TRoute['types']['loaderDeps'],
     TRoute['types']['allContext'],
-    TRoute['types']['routeContext'],
     TLoaderData
   >,
 ) => RouteLoaderFn<
   TRoute['types']['allParams'],
   TRoute['types']['loaderDeps'],
   TRoute['types']['allContext'],
-  TRoute['types']['routeContext'],
   NoInfer<TLoaderData>
 > {
   warning(

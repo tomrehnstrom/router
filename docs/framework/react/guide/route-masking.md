@@ -9,11 +9,12 @@ Route masking is a way to mask the actual URL of a route that gets persisted to 
 - Navigating to a route with the search param `?showLogin=true`, but masking the URL to _not_ contain the search param
 - Navigating to a route with the search param `?modal=settings`, but masking the URL as `/settings'
 
-Each of these scenarios can be achieved with route masking and even extended to support more advanced patterns like [parallel routes](../parallel-routes)
+Each of these scenarios can be achieved with route masking and even extended to support more advanced patterns like [parallel routes](./parallel-routes.md).
 
 ## How does route masking work?
 
-> 🧠 You **do not** need to understand how route masking works in order to use it. This section is for those who are curious about how it works under the hood. Skip to [How do I use route masking?](#how-do-i-use-route-masking) to learn how to use it!.
+> [!IMPORTANT]
+> You **do not** need to understand how route masking works in order to use it. This section is for those who are curious about how it works under the hood. Skip to [How do I use route masking?](#how-do-i-use-route-masking) to learn how to use it!.
 
 Route masking utilizes the `location.state` API to store the desired runtime location inside of the location that will get written to the URL. It stores this runtime location under the `__tempLocation` state property:
 

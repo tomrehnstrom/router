@@ -1,9 +1,9 @@
 import * as React from 'react'
 import invariant from 'tiny-invariant'
 import { useRouterState } from './useRouterState'
-import { type RegisteredRouter } from './router'
-import { type AnyRoute } from './route'
-import { matchContext } from './Matches'
+import { matchContext } from './matchContext'
+import type { RegisteredRouter } from './router'
+import type { AnyRoute } from './route'
 import type { MakeRouteMatch } from './Matches'
 import type { RouteIds } from './routeInfo'
 import type { StrictOrFrom } from './utils'
@@ -13,8 +13,10 @@ export type UseMatchOptions<
   TStrict extends boolean,
   TRouteMatch,
   TSelected,
+  TThrow extends boolean,
 > = StrictOrFrom<TFrom, TStrict> & {
   select?: (match: TRouteMatch) => TSelected
+  shouldThrow?: TThrow
 }
 
 export function useMatch<
@@ -23,7 +25,10 @@ export function useMatch<
   TStrict extends boolean = true,
   TRouteMatch = MakeRouteMatch<TRouteTree, TFrom, TStrict>,
   TSelected = TRouteMatch,
->(opts: UseMatchOptions<TFrom, TStrict, TRouteMatch, TSelected>): TSelected {
+  TThrow extends boolean = true,
+>(
+  opts: UseMatchOptions<TFrom, TStrict, TRouteMatch, TSelected, TThrow>,
+): TThrow extends true ? TSelected : TSelected | undefined {
   const nearestMatchId = React.useContext(matchContext)
 
   const matchSelection = useRouterState({
@@ -31,11 +36,14 @@ export function useMatch<
       const match = state.matches.find((d) =>
         opts.from ? opts.from === d.routeId : d.id === nearestMatchId,
       )
-
       invariant(
-        match,
+        !((opts.shouldThrow ?? true) && !match),
         `Could not find ${opts.from ? `an active match from "${opts.from}"` : 'a nearest match!'}`,
       )
+
+      if (match === undefined) {
+        return undefined
+      }
 
       return opts.select ? opts.select(match as any) : match
     },
