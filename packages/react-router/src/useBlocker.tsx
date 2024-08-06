@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useRouter } from './useRouter'
+import { type RegisteredRouter, type RouteIds, getRouteApi } from '.'
 import type { BlockerFn, BlockerFnArgs } from '@tanstack/history'
 import type { ReactNode } from './route'
-import { RegisteredRouter, RouteIds, getRouteApi } from '.'
 
 type BlockerResolver = {
   status: 'idle' | 'blocked'
@@ -14,6 +14,8 @@ type BlockerOpts<TId extends RouteIds<RegisteredRouter['routeTree']>> = {
   blockerFn: BlockerFn
   from?: TId
   to?: TId
+
+  disableBeforeUnload?: boolean | (() => boolean)
   disabled?: boolean
 }
 
@@ -23,6 +25,7 @@ export function useBlocker<
   blockerFn,
   from,
   to,
+  disableBeforeUnload = false,
   disabled = false,
 }: BlockerOpts<TId>): BlockerResolver {
   const router = useRouter()
@@ -53,10 +56,8 @@ export function useBlocker<
 
       if (!matchesFrom || !matchesTo) return true
 
-      if (blockerFn) {
-        const shouldBlock = await blockerFn(blockerFnArgs)
-        if (!shouldBlock) return true
-      }
+      const shouldBlock = await blockerFn(blockerFnArgs)
+      if (!shouldBlock) return true
 
       const promise = new Promise<boolean>((resolve) => {
         setResolver({
@@ -77,8 +78,10 @@ export function useBlocker<
       return canNavigateAsync
     }
 
-    return disabled ? undefined : history.block(blockerFnComposed)
-  }, [blockerFn, disabled, history])
+    return disabled
+      ? undefined
+      : history.block(blockerFnComposed, disableBeforeUnload)
+  }, [blockerFn, disableBeforeUnload, disabled, history])
 
   return resolver
 }

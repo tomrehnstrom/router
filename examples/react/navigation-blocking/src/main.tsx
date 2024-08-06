@@ -17,9 +17,10 @@ const rootRoute = createRootRoute({
 
 function RootComponent() {
   const { proceed, reset, status } = useBlocker({
-    from: '/editor-1',
+    from: '/',
     to: '/editor-1/editor-2',
     blockerFn: () => true,
+    disableBeforeUnload: true,
   })
 
   return (
@@ -42,12 +43,20 @@ function RootComponent() {
         >
           Editor 1
         </Link>
+        <Link
+          to={'/editor-1/editor-2'}
+          activeProps={{
+            className: 'font-bold',
+          }}
+        >
+          Editor 2
+        </Link>
       </div>
       <hr />
 
       {status === 'blocked' && (
         <div className="mt-2">
-          <div>Are you sure you want to leave editor 1?</div>
+          <div>Are you sure you want to leave home for editor-2?</div>
           <button
             className="bg-lime-500 text-white rounded p-1 px-2 mr-2"
             onClick={proceed}
@@ -90,19 +99,16 @@ const editor1Route = createRoute({
 
 function Editor1Component() {
   const [value, setValue] = React.useState('')
-  const [useCustomBlocker, setUseCustomBlocker] = React.useState(false)
+
+  const { proceed, reset, status } = useBlocker({
+    to: '/editor-1/editor-2',
+    blockerFn: () => value !== '',
+    disableBeforeUnload: () => value !== '',
+  })
 
   return (
     <div className="flex flex-col p-2">
       <h3>Editor 1</h3>
-      <label>
-        <input
-          type="checkbox"
-          checked={useCustomBlocker}
-          onChange={(e) => setUseCustomBlocker(e.target.checked)}
-        />{' '}
-        Use custom blocker
-      </label>
       <div>
         <input
           value={value}
@@ -113,6 +119,24 @@ function Editor1Component() {
       <hr className="m-2" />
       <Link to="/editor-1/editor-2">Go to Editor 2</Link>
       <Outlet />
+
+      {status === 'blocked' && (
+        <div className="mt-2">
+          <div>Are you sure you want to leave editor 1?</div>
+          <button
+            className="bg-lime-500 text-white rounded p-1 px-2 mr-2"
+            onClick={proceed}
+          >
+            YES
+          </button>
+          <button
+            className="bg-red-500 text-white rounded p-1 px-2"
+            onClick={reset}
+          >
+            NO
+          </button>
+        </div>
+      )}
     </div>
   )
 }

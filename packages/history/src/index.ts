@@ -16,7 +16,10 @@ export interface RouterHistory {
   back: (navigateOpts?: NavigateOptions) => void
   forward: (navigateOpts?: NavigateOptions) => void
   createHref: (href: string) => string
-  block: (blocker: BlockerFn) => () => void
+  block: (
+    blocker: BlockerFn,
+    disableBeforeUnload?: (() => boolean) | boolean,
+  ) => () => void
   flush: () => void
   destroy: () => void
   notify: () => void
@@ -68,18 +71,6 @@ type TryNavigateArgs = {
 const pushStateEvent = 'pushstate'
 const popStateEvent = 'popstate'
 const beforeUnloadEvent = 'beforeunload'
-
-const beforeUnloadListener = (event: Event) => {
-  event.preventDefault()
-  // @ts-expect-error
-  return (event.returnValue = '')
-}
-
-const stopBlocking = () => {
-  removeEventListener(beforeUnloadEvent, beforeUnloadListener, {
-    capture: true,
-  })
-}
 
 export function createHistory(opts: {
   getLocation: () => HistoryLocation
@@ -204,21 +195,47 @@ export function createHistory(opts: {
       })
     },
     createHref: (str) => opts.createHref(str),
-    block: (blocker) => {
+    block: (blocker, disableBeforeUnload) => {
       blockers.push(blocker)
 
-      if (blockers.length === 1) {
-        addEventListener(beforeUnloadEvent, beforeUnloadListener, {
-          capture: true,
-        })
+      const shouldNotApplyBeforeUnload = disableBeforeUnload === true
+
+      if (shouldNotApplyBeforeUnload) {
+        return () => {
+          blockers = blockers.filter((b) => b !== blocker)
+        }
       }
 
-      return () => {
-        blockers = blockers.filter((b) => b !== blocker)
+      const beforeUnloadListener = (e: Event) => {
+        const defaultBehavior =
+          typeof disableBeforeUnload === 'boolean' ||
+          disableBeforeUnload === undefined
 
-        if (!blockers.length) {
-          stopBlocking()
+        if (defaultBehavior) {
+          e.preventDefault()
+          // @ts-expect-error
+          e.returnValue = ''
+        } else {
+          const result = disableBeforeUnload()
+          if (result) {
+            e.preventDefault()
+            // @ts-expect-error
+            e.returnValue = ''
+          }
+          e.returnValue = ''
         }
+      }
+
+      addEventListener(beforeUnloadEvent, beforeUnloadListener, {
+        capture: true,
+      })
+
+      return () => {
+        removeEventListener(beforeUnloadEvent, beforeUnloadListener, {
+          capture: true,
+        })
+
+        blockers = blockers.filter((b) => b !== blocker)
       }
     },
     flush: () => opts.flush?.(),
