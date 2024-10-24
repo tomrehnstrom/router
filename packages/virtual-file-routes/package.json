@@ -23,12 +23,7 @@
     "async router",
     "typescript"
   ],
-  "scripts": {
-    "clean": "rimraf ./dist && rimraf ./coverage",
-    "test:eslint": "eslint ./src",
-    "test:build": "publint --strict && attw --ignore-rules no-resolution --pack .",
-    "build": "vite build"
-  },
+  "scripts": {},
   "type": "module",
   "types": "dist/esm/index.d.ts",
   "main": "dist/cjs/index.cjs",
