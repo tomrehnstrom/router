@@ -17,9 +17,9 @@
     "remix-auth-form": "^1.5.0",
     "tailwind-merge": "^2.5.4",
     "vinxi": "0.4.3",
-    "@tomrehnstrom/react-router": "^1.76.1",
-    "@tomrehnstrom/router-devtools": "^1.76.1",
-    "@tomrehnstrom/start": "^1.76.1"
+    "@tomrehnstrom/react-router": "^0.1.0",
+    "@tomrehnstrom/router-devtools": "^0.1.0",
+    "@tomrehnstrom/start": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.5.4",
