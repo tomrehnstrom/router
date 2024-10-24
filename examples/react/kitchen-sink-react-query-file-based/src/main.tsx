@@ -33,7 +33,7 @@ const router = createRouter({
   defaultPreloadStaleTime: 0,
 })
 
-declare module '@tanstack/react-router' {
+declare module '@tomrehnstrom/react-router' {
   interface Register {
     router: typeof router
   }

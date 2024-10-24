@@ -142,7 +142,7 @@ const DashboardInvoicesInvoiceIdRoute = DashboardInvoicesInvoiceIdImport.update(
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module '@tomrehnstrom/react-router' {
   interface FileRoutesByPath {
     '/': {
       id: '/'

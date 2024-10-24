@@ -13,7 +13,7 @@ export const router = createRouter({
   },
 })
 
-declare module '@tanstack/react-router' {
+declare module '@tomrehnstrom/react-router' {
   interface Register {
     router: typeof router
   }

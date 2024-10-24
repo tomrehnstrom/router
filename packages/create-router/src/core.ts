@@ -2,7 +2,7 @@ import { copyTemplateFiles } from './utils/copyTemplateFiles'
 import type { ApplyParams, PeerDependency } from './types'
 
 export const dependencies = [
-  '@tanstack/react-router',
+  '@tomrehnstrom/react-router',
   '@tanstack/router-devtools',
   'react',
   'react-dom',

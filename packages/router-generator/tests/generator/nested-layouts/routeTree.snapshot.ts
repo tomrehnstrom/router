@@ -187,7 +187,7 @@ const JestedLayoutB3LayoutC2BarRoute = JestedLayoutB3LayoutC2BarImport.update({
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module '@tomrehnstrom/react-router' {
   interface FileRoutesByPath {
     '/': {
       id: '/'

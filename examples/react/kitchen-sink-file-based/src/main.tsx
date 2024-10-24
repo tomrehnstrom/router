@@ -26,7 +26,7 @@ const router = createRouter({
   defaultPreload: 'intent',
 })
 
-declare module '@tanstack/react-router' {
+declare module '@tomrehnstrom/react-router' {
   interface Register {
     router: typeof router
   }

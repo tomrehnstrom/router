@@ -11,7 +11,7 @@ const router = createRouter({
 })
 
 // Register things for typesafety
-declare module '@tanstack/react-router' {
+declare module '@tomrehnstrom/react-router' {
   interface Register {
     router: typeof router
   }

@@ -46,7 +46,7 @@ export function createRouter() {
   return router
 }
 
-declare module '@tanstack/react-router' {
+declare module '@tomrehnstrom/react-router' {
   interface Register {
     router: ReturnType<typeof createRouter>
   }
