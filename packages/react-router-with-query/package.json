@@ -1,6 +1,6 @@
 {
   "name": "@tomrehnstrom/react-router-with-query",
-  "version": "0.1.0",
+  "version": "1.77.0",
   "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",
   "license": "MIT",

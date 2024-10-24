@@ -14,8 +14,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.23.8",
-    "@tomrehnstrom/react-router": "^0.1.0",
-    "@tomrehnstrom/router-devtools": "^0.1.0"
+    "@tomrehnstrom/react-router": "^1.77.0",
+    "@tomrehnstrom/router-devtools": "^1.77.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.47",

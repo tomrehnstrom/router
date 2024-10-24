@@ -82,7 +82,7 @@ await publish({
       prerelease: false,
     },
     'better-blocker-router': {
-      prerelease: false,
+      prerelease: true,
     },
     alpha: {
       prerelease: true,

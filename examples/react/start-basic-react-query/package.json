@@ -16,10 +16,10 @@
     "redaxios": "^0.5.1",
     "tailwind-merge": "^2.5.4",
     "vinxi": "0.4.3",
-    "@tomrehnstrom/react-router": "^0.1.0",
-    "@tomrehnstrom/react-router-with-query": "^0.1.0",
-    "@tomrehnstrom/router-devtools": "^0.1.0",
-    "@tomrehnstrom/start": "^0.1.0"
+    "@tomrehnstrom/react-router": "^1.77.0",
+    "@tomrehnstrom/react-router-with-query": "^1.77.0",
+    "@tomrehnstrom/router-devtools": "^1.77.0",
+    "@tomrehnstrom/start": "^1.77.0"
   },
   "devDependencies": {
     "@types/node": "^22.5.4",
