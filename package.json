@@ -27,8 +27,7 @@
     "prettier": "prettier --ignore-unknown '**/*'",
     "prettier:write": "pnpm run prettier --write",
     "cipublish": "node scripts/publish.js",
-    "gpt-generate": "node gpt/generate.js",
-    "update-name": "node scripts/update-name.js"
+    "gpt-generate": "node gpt/generate.js"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
@@ -41,7 +40,6 @@
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc-fb9a90fa48-20240614",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "glob": "^11.0.0",
     "jsdom": "^25.0.1",
     "nx": "^19.8.6",
     "prettier": "^3.3.3",
