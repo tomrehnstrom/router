@@ -1,5 +1,5 @@
 {
-  "name": "@tanstack/create-router",
+  "name": "@tomrehnstrom/create-router",
   "version": "1.76.1",
   "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",
@@ -49,8 +49,6 @@
     "@rsbuild/core": "^1.0.2",
     "@rsbuild/plugin-react": "^1.0.1",
     "@swc/core": "^1.7.25",
-    "@tanstack/router-devtools": "workspace:^",
-    "@tanstack/router-plugin": "workspace:^",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
@@ -63,7 +61,9 @@
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0",
-    "@tomrehnstrom/react-router": "workspace:^"
+    "@tomrehnstrom/react-router": "workspace:^",
+    "@tomrehnstrom/router-plugin": "workspace:^",
+    "@tomrehnstrom/router-devtools": "workspace:^"
   },
   "peerDependenciesMeta": {
     "@tanstack/react-router": {

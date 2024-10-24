@@ -11,13 +11,13 @@
   "dependencies": {
     "@tanstack/react-query": "^5.59.15",
     "@tanstack/react-query-devtools": "^5.59.15",
-    "@tanstack/router-devtools": "^1.76.1",
     "redaxios": "^0.5.1",
     "immer": "^10.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.23.8",
-    "@tomrehnstrom/react-router": "^1.76.1"
+    "@tomrehnstrom/react-router": "^1.76.1",
+    "@tomrehnstrom/router-devtools": "^1.76.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.47",

@@ -3,7 +3,7 @@ import {
   index,
   physical,
   route,
-} from '@tanstack/virtual-file-routes'
+} from '@tomrehnstrom/virtual-file-routes'
 
 // this just shows that you can use an async function to define your virtual routes
 export default defineVirtualSubtreeConfig(async () => [

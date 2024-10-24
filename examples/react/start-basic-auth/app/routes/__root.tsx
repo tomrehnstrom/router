@@ -4,7 +4,7 @@ import {
   ScrollRestoration,
   createRootRoute,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 import {
   Body,
   Head,
@@ -12,7 +12,7 @@ import {
   Meta,
   Scripts,
   createServerFn,
-} from '@tanstack/start'
+} from '@tomrehnstrom/start'
 import * as React from 'react'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary.js'
 import { NotFound } from '~/components/NotFound.js'

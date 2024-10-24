@@ -2,7 +2,7 @@ import { ScriptOnce, useRouter, useRouterState } from '@tomrehnstrom/react-route
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import jsesc from 'jsesc'
-import { Context } from '@tanstack/react-cross-context'
+import { Context } from '@tomrehnstrom/react-cross-context'
 import { Asset } from './Asset'
 import type { RouterManagedTag } from '@tomrehnstrom/react-router'
 

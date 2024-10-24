@@ -54,7 +54,7 @@ export function compileCreateServerFnOutput(opts: ParseAstOptions) {
             }
 
             path.node.specifiers.forEach((specifier) => {
-              // handles a destructured import being renamed like "import { createServerFn as myCreateServerFn } from '@tanstack/start';"
+              // handles a destructured import being renamed like "import { createServerFn as myCreateServerFn } from '@tomrehnstrom/start';"
               if (
                 specifier.type === 'ImportSpecifier' &&
                 specifier.imported.type === 'Identifier'
@@ -65,7 +65,7 @@ export function compileCreateServerFnOutput(opts: ParseAstOptions) {
                 }
               }
 
-              // handles a namespace import like "import * as TanStackStart from '@tanstack/start';"
+              // handles a namespace import like "import * as TanStackStart from '@tomrehnstrom/start';"
               if (specifier.type === 'ImportNamespaceSpecifier') {
                 identifierType = 'ImportNamespaceSpecifier'
                 namespaceId = specifier.local.name

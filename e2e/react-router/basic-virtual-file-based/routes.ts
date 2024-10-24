@@ -4,7 +4,7 @@ import {
   physical,
   rootRoute,
   route,
-} from '@tanstack/virtual-file-routes'
+} from '@tomrehnstrom/virtual-file-routes'
 
 export const routes = rootRoute('root.tsx', [
   index('home.tsx'),

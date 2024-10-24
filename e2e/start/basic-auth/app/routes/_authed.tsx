@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tomrehnstrom/react-router'
-import { createServerFn, json } from '@tanstack/start'
+import { createServerFn, json } from '@tomrehnstrom/start'
 import { Auth } from '../components/Auth'
 import { hashPassword, prismaClient } from '~/utils/prisma'
 import { Login } from '~/components/Login'

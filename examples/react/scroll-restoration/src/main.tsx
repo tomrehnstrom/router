@@ -10,7 +10,7 @@ import {
   createRouter,
   useElementScrollRestoration,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
 const rootRoute = createRootRoute({

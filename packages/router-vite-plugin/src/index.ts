@@ -1,2 +1,2 @@
-export * from '@tanstack/router-plugin/vite'
-export type * from '@tanstack/router-plugin/vite'
+export * from '@tomrehnstrom/router-plugin/vite'
+export type * from '@tomrehnstrom/router-plugin/vite'

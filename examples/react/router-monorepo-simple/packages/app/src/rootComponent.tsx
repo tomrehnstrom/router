@@ -1,5 +1,5 @@
 import { Link, Outlet } from '@router-mono-simple/router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 
 export function RootComponent() {
   return (

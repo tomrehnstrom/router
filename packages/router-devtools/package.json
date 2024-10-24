@@ -1,5 +1,5 @@
 {
-  "name": "@tanstack/router-devtools",
+  "name": "@tomrehnstrom/router-devtools",
   "version": "1.76.1",
   "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",

@@ -10,14 +10,14 @@
     "test:e2e": "playwright test --project=chromium"
   },
   "dependencies": {
-    "@tanstack/router-devtools": "workspace:^",
-    "@tanstack/router-plugin": "workspace:^",
-    "@tanstack/router-zod-adapter": "workspace:^",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "redaxios": "^0.5.1",
     "zod": "^3.23.8",
-    "@tomrehnstrom/react-router": "workspace:^"
+    "@tomrehnstrom/react-router": "workspace:^",
+    "@tomrehnstrom/router-plugin": "workspace:^",
+    "@tomrehnstrom/router-zod-adapter": "workspace:^",
+    "@tomrehnstrom/router-devtools": "workspace:^"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.1",

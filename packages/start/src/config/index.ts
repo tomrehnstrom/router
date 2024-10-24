@@ -4,16 +4,16 @@ import { readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import reactRefresh from '@vitejs/plugin-react'
 import { resolve } from 'import-meta-resolve'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { TanStackRouterVite } from '@tomrehnstrom/router-plugin/vite'
 import {
   TanStackStartVite,
   TanStackStartViteDeadCodeElimination,
-} from '@tanstack/start-vite-plugin'
+} from '@tomrehnstrom/start-vite-plugin'
 import {
   configSchema,
   getConfig,
   startAPIRouteSegmentsFromTSRFilePath,
-} from '@tanstack/router-generator'
+} from '@tomrehnstrom/router-generator'
 import { createApp } from 'vinxi'
 import { config } from 'vinxi/plugins/config'
 import {

@@ -8,7 +8,7 @@ import {
   physical,
   rootRoute,
   route,
-} from '@tanstack/virtual-file-routes'
+} from '@tomrehnstrom/virtual-file-routes'
 import { generator, getConfig } from '../src'
 import type { Config } from '../src'
 

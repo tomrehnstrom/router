@@ -5,7 +5,7 @@ import {
   createRootRouteWithContext,
 } from '@tomrehnstrom/react-router'
 import { type QueryClient } from '@tanstack/react-query'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 
 export interface Context {
   queryClient: QueryClient

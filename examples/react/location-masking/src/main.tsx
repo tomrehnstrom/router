@@ -12,7 +12,7 @@ import {
   useNavigate,
   useRouterState,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 import axios from 'redaxios'
 import * as Dialog from '@radix-ui/react-dialog'
 import type { ErrorComponentProps } from '@tomrehnstrom/react-router'

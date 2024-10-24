@@ -1,5 +1,5 @@
 import { Await, createFileRoute, defer } from '@tomrehnstrom/react-router'
-import { createServerFn } from '@tanstack/start'
+import { createServerFn } from '@tomrehnstrom/start'
 import { Suspense, useState } from 'react'
 
 const personServerFn = createServerFn('GET', (name: string) => {

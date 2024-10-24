@@ -1,6 +1,6 @@
 import path from 'node:path'
 import chokidar from 'chokidar'
-import { generator, getConfig } from '@tanstack/router-generator'
+import { generator, getConfig } from '@tomrehnstrom/router-generator'
 
 export function watch() {
   const configWatcher = chokidar.watch(

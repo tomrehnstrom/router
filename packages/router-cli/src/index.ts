@@ -1,5 +1,5 @@
 import * as yargs from 'yargs'
-import { getConfig } from '@tanstack/router-generator'
+import { getConfig } from '@tomrehnstrom/router-generator'
 import { generate } from './generate'
 import { watch } from './watch'
 

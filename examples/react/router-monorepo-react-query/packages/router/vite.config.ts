@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { TanStackRouterVite } from '@tomrehnstrom/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 
 const __filename = fileURLToPath(import.meta.url)

@@ -5,7 +5,7 @@ import {
   createRootRouteWithContext,
   useRouterState,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 import { Spinner } from '../components/Spinner'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import type { Auth } from '../utils/auth'

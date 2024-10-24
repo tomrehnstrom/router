@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Context } from '@tanstack/react-cross-context'
+import { Context } from '@tomrehnstrom/react-cross-context'
 import { RouterProvider } from '@tomrehnstrom/react-router'
 import jsesc from 'jsesc'
 import { AfterEachMatch } from '../client/serialization'

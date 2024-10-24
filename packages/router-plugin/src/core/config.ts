@@ -2,7 +2,7 @@ import { z } from 'zod'
 import {
   configSchema as generatorConfigSchema,
   getConfig as getGeneratorConfig,
-} from '@tanstack/router-generator'
+} from '@tomrehnstrom/router-generator'
 
 export const configSchema = generatorConfigSchema.extend({
   enableRouteGeneration: z.boolean().optional(),

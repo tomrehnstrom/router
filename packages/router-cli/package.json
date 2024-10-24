@@ -1,5 +1,5 @@
 {
-  "name": "@tanstack/router-cli",
+  "name": "@tomrehnstrom/router-cli",
   "version": "1.74.2",
   "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",
@@ -65,9 +65,9 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@tanstack/router-generator": "workspace:*",
     "chokidar": "^3.6.0",
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.2",
+    "@tomrehnstrom/router-generator": "workspace:*"
   },
   "devDependencies": {
     "@types/yargs": "^17.0.33"

@@ -360,7 +360,7 @@ export const Route = createRootRoute({
     const escapedRoutePath = node.routePath?.replaceAll('$', '$$') ?? ''
 
     if (!routeCode) {
-      const replaced = `import { json } from '@tanstack/start'
+      const replaced = `import { json } from '@tomrehnstrom/start'
 import { createAPIFileRoute } from '@tanstack/start/api'
 
 export const Route = createAPIFileRoute('${escapedRoutePath}')({

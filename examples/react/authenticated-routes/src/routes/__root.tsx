@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Outlet, createRootRouteWithContext } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 
 import type { AuthContext } from '../auth'
 

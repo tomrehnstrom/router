@@ -4,7 +4,7 @@ import {
   createRootRouteWithContext,
   useRouterState,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 
 import { Spinner } from './-components/spinner'
 import type { trpc } from '../trpc'

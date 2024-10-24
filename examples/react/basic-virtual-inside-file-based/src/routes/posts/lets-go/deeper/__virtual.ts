@@ -1,6 +1,6 @@
 import {
   defineVirtualSubtreeConfig,
   index,
-} from '@tanstack/virtual-file-routes'
+} from '@tomrehnstrom/virtual-file-routes'
 
 export default defineVirtualSubtreeConfig([index('home.tsx')])

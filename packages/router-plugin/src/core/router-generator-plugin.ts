@@ -1,5 +1,5 @@
 import { isAbsolute, join, normalize, resolve } from 'node:path'
-import { generator } from '@tanstack/router-generator'
+import { generator } from '@tomrehnstrom/router-generator'
 
 import { getConfig } from './config'
 import { CONFIG_FILE_NAME } from './constants'

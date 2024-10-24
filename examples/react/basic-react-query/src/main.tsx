@@ -11,7 +11,7 @@ import {
   createRouter,
   useRouter,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {
   QueryClient,

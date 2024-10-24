@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tomrehnstrom/react-router'
-import { createServerFn, useServerFn } from '@tanstack/start'
+import { createServerFn, useServerFn } from '@tomrehnstrom/start'
 
 import { setResponseStatus } from 'vinxi/http'
 

@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from '@tomrehnstrom/react-router'
-import { createServerFn } from '@tanstack/start'
+import { createServerFn } from '@tomrehnstrom/start'
 import { useAppSession } from '~/utils/session'
 
 const logoutFn = createServerFn('POST', async () => {

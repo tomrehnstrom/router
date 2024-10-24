@@ -1,5 +1,5 @@
 {
-  "name": "@tanstack/router-vite-plugin",
+  "name": "@tomrehnstrom/router-vite-plugin",
   "version": "1.76.0",
   "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",
@@ -64,6 +64,6 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@tanstack/router-plugin": "workspace:^"
+    "@tomrehnstrom/router-plugin": "workspace:^"
   }
 }

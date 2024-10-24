@@ -8,7 +8,7 @@ import {
   createRoute,
   createRouter,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
 
 const rootRoute = createRootRoute({
   component: () => (

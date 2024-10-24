@@ -6,7 +6,7 @@ import {
 } from '@tomrehnstrom/react-router'
 import { fetchPost } from '../utils/posts'
 import { NotFound } from '~/components/NotFound'
-import { createServerFn } from '@tanstack/start'
+import { createServerFn } from '@tomrehnstrom/start'
 
 const renderPost = createServerFn('GET', async (postId: string) => {
   const post = await fetchPost(postId)

@@ -1,6 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import { notFound } from '@tomrehnstrom/react-router'
-import { createServerFn } from '@tanstack/start'
+import { createServerFn } from '@tomrehnstrom/start'
 import axios from 'redaxios'
 
 export type PostType = {

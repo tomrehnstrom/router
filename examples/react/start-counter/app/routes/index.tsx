@@ -1,7 +1,7 @@
 // app/routes/index.tsx
 import * as fs from 'fs'
 import { createFileRoute, useRouter } from '@tomrehnstrom/react-router'
-import { createServerFn } from '@tanstack/start'
+import { createServerFn } from '@tomrehnstrom/start'
 
 const filePath = 'count.txt'
 

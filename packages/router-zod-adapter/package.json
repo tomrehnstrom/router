@@ -1,5 +1,5 @@
 {
-  "name": "@tanstack/router-zod-adapter",
+  "name": "@tomrehnstrom/router-zod-adapter",
   "version": "1.76.1",
   "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",

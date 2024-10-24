@@ -6,8 +6,8 @@ import {
   createRootRouteWithContext,
   useRouterState,
 } from '@tomrehnstrom/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
+import { TanStackRouterDevtools } from '@tomrehnstrom/router-devtools'
+import { Body, Head, Html, Meta, Scripts } from '@tomrehnstrom/start'
 import * as React from 'react'
 import { Toaster } from 'react-hot-toast'
 import type { QueryClient } from '@tanstack/react-query'

@@ -11,15 +11,15 @@
     "debug": "node --inspect-brk server"
   },
   "dependencies": {
-    "@tanstack/router-devtools": "^1.76.1",
-    "@tanstack/router-plugin": "^1.76.0",
-    "@tanstack/start": "^1.76.1",
     "get-port": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "redaxios": "^0.5.1",
     "superjson": "^2.2.1",
-    "@tomrehnstrom/react-router": "^1.76.1"
+    "@tomrehnstrom/react-router": "^1.76.1",
+    "@tomrehnstrom/router-plugin": "^1.76.0",
+    "@tomrehnstrom/router-devtools": "^1.76.1",
+    "@tomrehnstrom/start": "^1.76.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",

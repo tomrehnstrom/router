@@ -1,6 +1,6 @@
 import { createApp } from 'vinxi'
 import reactRefresh from '@vitejs/plugin-react'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { TanStackRouterVite } from '@tomrehnstrom/router-plugin/vite'
 
 export default createApp({
   server: {
