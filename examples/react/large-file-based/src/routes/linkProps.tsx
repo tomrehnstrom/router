@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, createFileRoute, linkOptions } from '@tanstack/react-router'
+import { Link, createFileRoute, linkOptions } from '@tomrehnstrom/react-router'
 
 export const Route = createFileRoute('/linkProps')({
   component: LinkPropsPage,

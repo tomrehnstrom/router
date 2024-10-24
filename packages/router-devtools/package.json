@@ -71,8 +71,8 @@
     "react-dom": "^18.2.0"
   },
   "peerDependencies": {
-    "@tanstack/react-router": "workspace:^",
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "@tomrehnstrom/react-router": "workspace:^"
   }
 }

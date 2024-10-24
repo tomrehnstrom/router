@@ -21,5 +21,5 @@ export {
   RouterProvider,
   getRouteApi,
   ErrorComponent,
-} from '@tanstack/react-router'
-export type { ErrorComponentProps } from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
+export type { ErrorComponentProps } from '@tomrehnstrom/react-router'

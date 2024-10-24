@@ -4,7 +4,7 @@ import {
   Outlet,
   createFileRoute,
   linkOptions,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 export const Route = createFileRoute('/dashboard')({
   component: DashboardComponent,

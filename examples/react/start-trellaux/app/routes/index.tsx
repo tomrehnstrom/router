@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tomrehnstrom/react-router'
 import { Loader } from '~/components/Loader'
 import { boardQueries } from '~/queries'
 

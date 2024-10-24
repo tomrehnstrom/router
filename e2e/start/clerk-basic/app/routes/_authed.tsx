@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 import { SignIn } from '@clerk/tanstack-start'
 
 export const Route = createFileRoute('/_authed')({

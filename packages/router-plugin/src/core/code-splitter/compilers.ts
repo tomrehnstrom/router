@@ -130,7 +130,7 @@ export function compileCodeSplitReferenceRoute(opts: ParseAstOptions) {
                             ) {
                               programPath.unshiftContainer('body', [
                                 template.statement(
-                                  `import { lazyRouteComponent } from '@tanstack/react-router'`,
+                                  `import { lazyRouteComponent } from '@tomrehnstrom/react-router'`,
                                 )(),
                               ])
                             }
@@ -187,7 +187,7 @@ export function compileCodeSplitReferenceRoute(opts: ParseAstOptions) {
                             if (!hasImportedOrDefinedIdentifier('lazyFn')) {
                               programPath.unshiftContainer('body', [
                                 template.smart(
-                                  `import { lazyFn } from '@tanstack/react-router'`,
+                                  `import { lazyFn } from '@tomrehnstrom/react-router'`,
                                 )() as t.Statement,
                               ])
                             }

@@ -5,7 +5,7 @@ import {
   trimPath,
   useRouter,
   useRouterState,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 import * as goober from 'goober'
 import { clsx as cx } from 'clsx'
@@ -31,7 +31,7 @@ import type {
   AnyRouteMatch,
   AnyRouter,
   Route,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 interface DevtoolsOptions {
   /**

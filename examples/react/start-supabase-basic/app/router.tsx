@@ -1,5 +1,5 @@
 // app/router.tsx
-import { createRouter as createTanStackRouter } from '@tanstack/react-router'
+import { createRouter as createTanStackRouter } from '@tomrehnstrom/react-router'
 import { routeTree } from './routeTree.gen'
 
 export function createRouter() {

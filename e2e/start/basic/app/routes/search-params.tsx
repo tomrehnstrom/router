@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tomrehnstrom/react-router'
 import { z } from 'zod'
 
 export const Route = createFileRoute('/search-params')({

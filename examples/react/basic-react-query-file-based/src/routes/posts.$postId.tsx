@@ -3,14 +3,14 @@ import {
   ErrorComponent,
   createFileRoute,
   useRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import {
   useQueryErrorResetBoundary,
   useSuspenseQuery,
 } from '@tanstack/react-query'
 import { PostNotFoundError } from '../posts'
 import { postQueryOptions } from '../postQueryOptions'
-import type { ErrorComponentProps } from '@tanstack/react-router'
+import type { ErrorComponentProps } from '@tomrehnstrom/react-router'
 
 export const Route = createFileRoute('/posts/$postId')({
   loader: ({ context: { queryClient }, params: { postId } }) => {

@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query'
 import {
   createRootRouteWithContext,
   createRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 import { expectTypeOf, test } from 'vitest'
 

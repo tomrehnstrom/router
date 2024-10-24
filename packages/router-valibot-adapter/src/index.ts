@@ -1,5 +1,5 @@
 import { parse } from 'valibot'
-import type { SearchValidatorAdapter } from '@tanstack/react-router'
+import type { SearchValidatorAdapter } from '@tomrehnstrom/react-router'
 import type { GenericSchema, InferInput, InferOutput } from 'valibot'
 
 export type ValibotSearchValidatorAdapter<TOptions extends GenericSchema> =

@@ -4,7 +4,7 @@ import {
   ErrorComponent,
   RouterProvider,
   createRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { auth } from './utils/auth'
 import { Spinner } from './components/Spinner'
 import { routeTree } from './routeTree.gen'

@@ -63,11 +63,11 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
-    "@tanstack/react-router": "workspace:*",
-    "arktype": "^2.0.0-rc.17"
+    "arktype": "^2.0.0-rc.17",
+    "@tomrehnstrom/react-router": "workspace:*"
   },
   "peerDependencies": {
     "arktype": ">=2.0.0-rc <3",
-    "@tanstack/react-router": ">=1.43.2"
+    "@tomrehnstrom/react-router": ">=1.43.2"
   }
 }

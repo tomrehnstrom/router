@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tomrehnstrom/react-router'
 import { fallback, zodSearchValidator } from '@tanstack/router-zod-adapter'
 import { z } from 'zod'
 import { Header } from '../../components/Header'

@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 import * as React from 'react'
 
 export const Route = createFileRoute('/')({

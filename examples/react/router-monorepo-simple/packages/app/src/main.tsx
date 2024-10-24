@@ -1,6 +1,6 @@
 import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider } from '@tanstack/react-router'
+import { RouterProvider } from '@tomrehnstrom/react-router'
 import { Outlet, router } from '@router-mono-simple/router'
 import {
   PostErrorComponent,

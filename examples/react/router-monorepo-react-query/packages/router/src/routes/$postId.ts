@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 import { postQueryOptions } from '@router-mono-react-query/post-query'
 
 export const Route = createFileRoute('/$postId')({

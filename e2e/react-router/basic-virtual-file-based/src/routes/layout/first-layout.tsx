@@ -1,4 +1,4 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
+import { Outlet, createFileRoute } from '@tomrehnstrom/react-router'
 
 export const Route = createFileRoute('/_first')({
   component: LayoutComponent,

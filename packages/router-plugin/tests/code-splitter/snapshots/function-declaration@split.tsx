@@ -1,4 +1,4 @@
-import { Link, Outlet } from '@tanstack/react-router';
+import { Link, Outlet } from '@tomrehnstrom/react-router';
 import { fetchPosts } from '../posts';
 import { Route } from "function-declaration.tsx";
 const component = function PostsComponent() {

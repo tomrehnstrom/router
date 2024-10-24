@@ -1,4 +1,4 @@
-import { defer } from '@tanstack/react-router';
+import { defer } from '@tomrehnstrom/react-router';
 import { getSponsorsForSponsorPack } from '~/server/sponsors';
 import discordImage from '~/images/discord-logo-white.svg';
 import { sample } from '~/utils/utils';

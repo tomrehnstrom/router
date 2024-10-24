@@ -9,7 +9,7 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 import { Meta, Scripts } from '../index'
 

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createFileRoute, useRouter } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tomrehnstrom/react-router'
 import { z } from 'zod'
 
 export const Route = createFileRoute('/login')({

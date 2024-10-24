@@ -1,4 +1,4 @@
-import { createRouter as createTanStackRouter } from '@tanstack/react-router'
+import { createRouter as createTanStackRouter } from '@tomrehnstrom/react-router'
 import {
   MutationCache,
   QueryClient,

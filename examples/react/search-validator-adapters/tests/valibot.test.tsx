@@ -6,7 +6,7 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import * as v from 'valibot'
 import '@testing-library/jest-dom/vitest'
 

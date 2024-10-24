@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 import { createServerFn } from '@tanstack/start'
 import { Login } from '../components/Login'
 import { getSupabaseServerClient } from '../utils/supabase'

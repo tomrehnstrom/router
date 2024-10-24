@@ -3,7 +3,7 @@ import {
   Outlet,
   createRootRouteWithContext,
   useRouterState,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import { Spinner } from './-components/spinner'

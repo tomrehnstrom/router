@@ -1,6 +1,6 @@
-import { useRouter, useRouterState } from '@tanstack/react-router'
+import { useRouter, useRouterState } from '@tomrehnstrom/react-router'
 import { Asset } from './Asset'
-import type { RouterManagedTag } from '@tanstack/react-router'
+import type { RouterManagedTag } from '@tomrehnstrom/react-router'
 
 export const Scripts = () => {
   const router = useRouter()

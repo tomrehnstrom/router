@@ -5,7 +5,7 @@ import {
   ScrollRestoration,
   createRootRouteWithContext,
   useRouterState,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
 import * as React from 'react'

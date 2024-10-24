@@ -6,7 +6,7 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 import '@testing-library/jest-dom/vitest'
 import { type } from 'arktype'

@@ -1,6 +1,6 @@
 const $$splitLoaderImporter = () => import('tsr-split:retain-export-component.tsx?tsr-split');
-import { lazyFn } from '@tanstack/react-router';
-import { createFileRoute, Outlet } from '@tanstack/react-router';
+import { lazyFn } from '@tomrehnstrom/react-router';
+import { createFileRoute, Outlet } from '@tomrehnstrom/react-router';
 import { importedComponent as ImportedComponent } from '../shared/imported';
 export function Layout() {
   return <main>

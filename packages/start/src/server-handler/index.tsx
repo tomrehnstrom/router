@@ -3,7 +3,7 @@ import {
   defaultParseSearch,
   isNotFound,
   isRedirect,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import invariant from 'tiny-invariant'
 import {
   eventHandler,

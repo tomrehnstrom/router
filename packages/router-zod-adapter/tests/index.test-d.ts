@@ -3,7 +3,7 @@ import {
   createRoute,
   createRouter,
   Link,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { test, expectTypeOf } from 'vitest'
 import { zodSearchValidator } from '../src'
 import { z } from 'zod'

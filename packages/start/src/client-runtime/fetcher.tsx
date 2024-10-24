@@ -3,7 +3,7 @@ import {
   isNotFound,
   isPlainObject,
   isRedirect,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import {
   serverFnPayloadTypeHeader,
   serverFnReturnTypeHeader,

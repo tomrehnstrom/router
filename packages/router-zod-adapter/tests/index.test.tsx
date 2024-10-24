@@ -7,7 +7,7 @@ import {
   createRouter,
   Link,
   RouterProvider,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
 

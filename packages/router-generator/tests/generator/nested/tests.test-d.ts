@@ -10,7 +10,7 @@ import {
   useParams,
   useRouteContext,
   useSearch,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { test, expectTypeOf } from 'vitest'
 import { routeTree } from './routeTree.gen'
 

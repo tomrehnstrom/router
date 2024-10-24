@@ -4,7 +4,7 @@ import {
   MatchRoute,
   Outlet,
   createFileRoute,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 import { trpc } from '../router'
 import { Spinner } from './-components/spinner'

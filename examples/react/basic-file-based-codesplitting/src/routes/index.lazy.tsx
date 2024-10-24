@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tomrehnstrom/react-router'
 import * as React from 'react'
 
 export const Route = createLazyFileRoute('/')({

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { createLazyFileRoute, Link } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tomrehnstrom/react-router'
 
 export const Route = createLazyFileRoute('/(test)/lazy')({
   component: () => {

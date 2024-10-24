@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 import { z } from 'zod'
 import { zodSearchValidator } from '@tanstack/router-zod-adapter'
 

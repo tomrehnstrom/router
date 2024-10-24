@@ -4,7 +4,7 @@ import {
   MatchRoute,
   Outlet,
   createFileRoute,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Spinner } from '../components/Spinner'
 import { invoicesQueryOptions } from '../utils/queryOptions'

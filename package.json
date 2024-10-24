@@ -3,7 +3,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/TanStack/router.git"
+    "url": "https://github.com/tomrehnstrom/router.git"
   },
   "packageManager": "pnpm@9.12.2",
   "type": "module",
@@ -27,7 +27,8 @@
     "prettier": "prettier --ignore-unknown '**/*'",
     "prettier:write": "pnpm run prettier --write",
     "cipublish": "node scripts/publish.js",
-    "gpt-generate": "node gpt/generate.js"
+    "gpt-generate": "node gpt/generate.js",
+    "update-name": "node scripts/update-name.js"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
@@ -65,9 +66,9 @@
     "overrides": {
       "eslint": "$eslint",
       "use-sync-external-store": "1.2.2",
-      "@tanstack/history": "workspace:*",
+      "@tomrehnstrom/history": "workspace:*",
       "@tanstack/react-cross-context": "workspace:*",
-      "@tanstack/react-router": "workspace:*",
+      "@tomrehnstrom/react-router": "workspace:*",
       "@tanstack/router-cli": "workspace:*",
       "@tanstack/router-devtools": "workspace:*",
       "@tanstack/router-generator": "workspace:*",

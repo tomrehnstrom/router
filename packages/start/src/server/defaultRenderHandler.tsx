@@ -1,7 +1,7 @@
 import ReactDOMServer from 'react-dom/server'
 import { StartServer } from './StartServer'
 import type { HandlerCallback } from './defaultStreamHandler'
-import type { AnyRouter } from '@tanstack/react-router'
+import type { AnyRouter } from '@tomrehnstrom/react-router'
 
 export const defaultRenderHandler: HandlerCallback<AnyRouter> = ({
   router,

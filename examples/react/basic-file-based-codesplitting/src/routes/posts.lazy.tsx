@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, Outlet, createLazyFileRoute } from '@tanstack/react-router'
+import { Link, Outlet, createLazyFileRoute } from '@tomrehnstrom/react-router'
 
 export const Route = createLazyFileRoute('/posts')({
   component: PostsComponent,

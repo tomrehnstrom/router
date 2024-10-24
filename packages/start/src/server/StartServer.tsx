@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Context } from '@tanstack/react-cross-context'
-import { RouterProvider } from '@tanstack/react-router'
+import { RouterProvider } from '@tomrehnstrom/react-router'
 import jsesc from 'jsesc'
 import { AfterEachMatch } from '../client/serialization'
-import type { AnyRouter } from '@tanstack/react-router'
+import type { AnyRouter } from '@tomrehnstrom/react-router'
 
 export function StartServer<TRouter extends AnyRouter>(props: {
   router: TRouter

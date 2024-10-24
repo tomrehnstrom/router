@@ -3,7 +3,7 @@ import {
   Link,
   Outlet,
   createRootRouteWithContext,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { type QueryClient } from '@tanstack/react-query'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 

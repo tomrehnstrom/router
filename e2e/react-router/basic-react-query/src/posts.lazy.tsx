@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, Outlet, createLazyRoute } from '@tanstack/react-router'
+import { Link, Outlet, createLazyRoute } from '@tomrehnstrom/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { postsQueryOptions } from './posts'
 

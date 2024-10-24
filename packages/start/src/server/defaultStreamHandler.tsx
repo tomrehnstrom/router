@@ -6,7 +6,7 @@ import {
   transformReadableStreamWithRouter,
   transformStreamWithRouter,
 } from './transformStreamWithRouter'
-import type { AnyRouter } from '@tanstack/react-router'
+import type { AnyRouter } from '@tomrehnstrom/react-router'
 
 export type HandlerCallback<TRouter extends AnyRouter> = (ctx: {
   request: Request

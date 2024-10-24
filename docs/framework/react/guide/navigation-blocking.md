@@ -38,7 +38,7 @@ There are 2 ways to use navigation blocking:
 Let's imagine we want to prevent navigation if a form is dirty. We can do this by using the `useBlocker` hook:
 
 ```tsx
-import { useBlocker } from '@tanstack/react-router'
+import { useBlocker } from '@tomrehnstrom/react-router'
 
 function MyComponent() {
   const [formIsDirty, setFormIsDirty] = useState(false)
@@ -95,7 +95,7 @@ However, in some situations, you might want to show a custom UI that is intentio
 ### Hook/logical-based custom UI
 
 ```tsx
-import { useBlocker } from '@tanstack/react-router'
+import { useBlocker } from '@tomrehnstrom/react-router'
 
 function MyComponent() {
   const [formIsDirty, setFormIsDirty] = useState(false)

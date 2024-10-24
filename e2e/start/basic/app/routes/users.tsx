@@ -1,4 +1,4 @@
-import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
+import { Link, Outlet, createFileRoute } from '@tomrehnstrom/react-router'
 import axios from 'redaxios'
 import { DEPLOY_URL, type User } from '../utils/users'
 

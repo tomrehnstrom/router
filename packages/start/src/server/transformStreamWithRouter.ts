@@ -1,5 +1,5 @@
 import { Transform } from 'node:stream'
-import type { AnyRouter } from '@tanstack/react-router'
+import type { AnyRouter } from '@tomrehnstrom/react-router'
 
 export function transformStreamWithRouter(router: AnyRouter) {
   const callbacks = transformHtmlCallbacks(() =>

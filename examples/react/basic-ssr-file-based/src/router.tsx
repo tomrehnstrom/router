@@ -1,4 +1,4 @@
-import { createRouter as createReactRouter } from '@tanstack/react-router'
+import { createRouter as createReactRouter } from '@tomrehnstrom/react-router'
 
 import { routeTree } from './routeTree.gen'
 

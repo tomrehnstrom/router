@@ -1,4 +1,4 @@
-import { Await, createFileRoute, defer, notFound } from '@tanstack/react-router'
+import { Await, createFileRoute, defer, notFound } from '@tomrehnstrom/react-router'
 import * as React from 'react'
 import type { PostType } from '../posts'
 

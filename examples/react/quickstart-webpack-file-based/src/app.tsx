@@ -1,4 +1,4 @@
-import { createRouter, RouterProvider } from '@tanstack/react-router'
+import { createRouter, RouterProvider } from '@tomrehnstrom/react-router'
 
 import { routeTree } from './routeTree.gen'
 

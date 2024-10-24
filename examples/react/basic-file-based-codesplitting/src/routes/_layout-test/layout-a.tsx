@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 
 export const Route = createFileRoute('/_layout-test/layout-a')({
   component: LayoutAComponent,

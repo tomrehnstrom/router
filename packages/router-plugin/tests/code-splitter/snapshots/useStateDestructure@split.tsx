@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CgCornerUpLeft, CgSpinner } from 'react-icons/cg';
 import { FaDiscord, FaGithub, FaTshirt, FaTwitter } from 'react-icons/fa';
-import { Await, Link, getRouteApi } from '@tanstack/react-router';
+import { Await, Link, getRouteApi } from '@tomrehnstrom/react-router';
 import { Carbon } from '~/components/Carbon';
 import { Footer } from '~/components/Footer';
 import { TbHeartHandshake } from 'react-icons/tb';

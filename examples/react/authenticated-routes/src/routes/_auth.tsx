@@ -5,7 +5,7 @@ import {
   createFileRoute,
   redirect,
   useRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 import { useAuth } from '../auth'
 

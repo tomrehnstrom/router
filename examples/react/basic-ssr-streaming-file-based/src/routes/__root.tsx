@@ -4,7 +4,7 @@ import {
   Link,
   Outlet,
   createRootRouteWithContext,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
 import type { RouterContext } from '../routerContext'
 

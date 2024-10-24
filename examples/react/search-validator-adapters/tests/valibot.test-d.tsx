@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from '@tomrehnstrom/react-router'
 import { expectTypeOf, test } from 'vitest'
 import { Route as ValibotRoute } from '../src/routes/users/valibot.index'
 import type { router } from '../src/main'

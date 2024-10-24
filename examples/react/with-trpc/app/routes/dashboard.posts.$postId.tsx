@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tomrehnstrom/react-router'
 import { z } from 'zod'
 
 export const Route = createFileRoute('/dashboard/posts/$postId')({

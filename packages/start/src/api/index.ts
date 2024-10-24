@@ -1,6 +1,6 @@
 import { eventHandler, toWebRequest } from 'vinxi/http'
 import vinxiFileRoutes from 'vinxi/routes'
-import type { ResolveParams } from '@tanstack/react-router'
+import type { ResolveParams } from '@tomrehnstrom/react-router'
 
 export type StartAPIHandlerCallback = (ctx: {
   request: Request

@@ -4,7 +4,7 @@ import {
   ErrorComponentProps,
   Link,
   createFileRoute,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 export const Route = createFileRoute('/posts/$postId/')({
   loader: async ({ params: { postId } }) => ({

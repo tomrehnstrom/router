@@ -11,10 +11,10 @@ import {
   createRoute,
   createRouter,
   defer,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import axios from 'redaxios'
-import type { ErrorComponentProps } from '@tanstack/react-router'
+import type { ErrorComponentProps } from '@tomrehnstrom/react-router'
 
 type PostType = {
   id: string

@@ -11,7 +11,6 @@
     "debug": "node --inspect-brk server"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.76.1",
     "@tanstack/router-devtools": "^1.76.1",
     "@tanstack/router-plugin": "^1.76.0",
     "@tanstack/start": "^1.76.1",
@@ -19,7 +18,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "redaxios": "^0.5.1",
-    "superjson": "^2.2.1"
+    "superjson": "^2.2.1",
+    "@tomrehnstrom/react-router": "^1.76.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",

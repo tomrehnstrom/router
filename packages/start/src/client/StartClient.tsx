@@ -1,6 +1,6 @@
-import { RouterProvider } from '@tanstack/react-router'
+import { RouterProvider } from '@tomrehnstrom/react-router'
 import { afterHydrate } from './serialization'
-import type { AnyRouter } from '@tanstack/react-router'
+import type { AnyRouter } from '@tomrehnstrom/react-router'
 
 let cleaned = false
 

@@ -1,4 +1,4 @@
-import { Link, createRootRouteWithContext } from '@tanstack/react-router'
+import { Link, createRootRouteWithContext } from '@tomrehnstrom/react-router'
 import type { QueryClient } from '@tanstack/react-query'
 
 export const Route = createRootRouteWithContext<{

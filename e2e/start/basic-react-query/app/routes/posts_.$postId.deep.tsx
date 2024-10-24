@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tomrehnstrom/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { postQueryOptions } from '../utils/posts'
 import { PostErrorComponent } from './posts.$postId'

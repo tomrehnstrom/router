@@ -12,7 +12,7 @@ import {
 } from './utils'
 import { exactPathTest, removeTrailingSlash } from './path'
 import type { ParsedLocation } from './location'
-import type { HistoryState } from '@tanstack/history'
+import type { HistoryState } from '@tomrehnstrom/history'
 import type {
   AllParams,
   CatchAllPaths,

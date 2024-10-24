@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tomrehnstrom/react-router'
 import { createServerFn } from '@tanstack/start'
 import { useAppSession } from '~/utils/session'
 

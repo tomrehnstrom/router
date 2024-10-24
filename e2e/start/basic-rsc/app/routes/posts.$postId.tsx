@@ -3,7 +3,7 @@ import {
   ErrorComponentProps,
   Link,
   createFileRoute,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { fetchPost } from '../utils/posts'
 import { NotFound } from '~/components/NotFound'
 import { createServerFn } from '@tanstack/start'

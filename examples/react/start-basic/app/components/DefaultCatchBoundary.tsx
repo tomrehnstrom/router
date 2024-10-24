@@ -5,7 +5,7 @@ import {
   rootRouteId,
   useMatch,
   useRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   const router = useRouter()

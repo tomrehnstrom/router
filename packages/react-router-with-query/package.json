@@ -67,13 +67,13 @@
     "@vitejs/plugin-react": "^4.3.3",
     "react": ">=18",
     "react-dom": ">=18",
-    "@tanstack/react-router": "workspace:*",
-    "@tanstack/react-query": ">=5.59.15"
+    "@tanstack/react-query": ">=5.59.15",
+    "@tomrehnstrom/react-router": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@tanstack/react-router": ">=1.43.2",
-    "@tanstack/react-query": ">=5.49.2"
+    "@tanstack/react-query": ">=5.49.2",
+    "@tomrehnstrom/react-router": ">=1.43.2"
   }
 }

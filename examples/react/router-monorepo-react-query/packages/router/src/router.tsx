@@ -1,10 +1,10 @@
 import React from 'react'
-import { createRouter } from '@tanstack/react-router'
+import { createRouter } from '@tomrehnstrom/react-router'
 
 // Import the generated route tree
 import { QueryClient } from '@tanstack/react-query'
 import { routeTree } from './routeTree.gen'
-import type { RouteIds } from '@tanstack/react-router'
+import type { RouteIds } from '@tomrehnstrom/react-router'
 
 export const queryClient = new QueryClient()
 

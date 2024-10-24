@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { ErrorComponent, createFileRoute } from '@tanstack/react-router'
+import { ErrorComponent, createFileRoute } from '@tomrehnstrom/react-router'
 import { fetchPost } from '../posts'
-import type { ErrorComponentProps } from '@tanstack/react-router'
+import type { ErrorComponentProps } from '@tomrehnstrom/react-router'
 
 export const Route = createFileRoute('/posts/$postId')({
   loader: async ({ params: { postId } }) => fetchPost(postId),

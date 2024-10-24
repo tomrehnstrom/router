@@ -6,7 +6,7 @@ import {
   Outlet,
   createFileRoute,
   useNavigate,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { z } from 'zod'
 import { Spinner } from '../components/Spinner'

@@ -11,14 +11,14 @@ import {
   FaTshirt,
   FaTwitter,
 } from 'react-icons/fa'
-import { Await, Link, getRouteApi } from '@tanstack/react-router'
+import { Await, Link, getRouteApi } from '@tomrehnstrom/react-router'
 import { Carbon } from '~/components/Carbon'
 import { Footer } from '~/components/Footer'
 import { VscPreview, VscWand } from 'react-icons/vsc'
 import { TbHeartHandshake } from 'react-icons/tb'
 import SponsorPack from '~/components/SponsorPack'
 import { startProject } from '~/projects/start'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 import { Framework, getBranch } from '~/projects'
 import { seo } from '~/utils/seo'
 

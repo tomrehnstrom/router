@@ -5,7 +5,7 @@ import type {
   AnyRootRoute,
   AnyRoute,
   AnyRouteMatch,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 import type { Theme } from './theme'
 

@@ -4,7 +4,7 @@ import {
   redirect,
   useRouter,
   useRouterState,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { z } from 'zod'
 
 import { useAuth } from '../auth'

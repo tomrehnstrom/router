@@ -3,7 +3,7 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { expectTypeOf, test } from 'vitest'
 import * as v from 'valibot'
 import { valibotSearchValidator } from '../src'

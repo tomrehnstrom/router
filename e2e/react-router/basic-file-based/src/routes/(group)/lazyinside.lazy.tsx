@@ -2,7 +2,7 @@ import {
   createLazyFileRoute,
   getRouteApi,
   useSearch,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 const routeApi = getRouteApi('/(group)/lazyinside')
 

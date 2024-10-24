@@ -1,10 +1,10 @@
-import { ScriptOnce, useRouter, useRouterState } from '@tanstack/react-router'
+import { ScriptOnce, useRouter, useRouterState } from '@tomrehnstrom/react-router'
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import jsesc from 'jsesc'
 import { Context } from '@tanstack/react-cross-context'
 import { Asset } from './Asset'
-import type { RouterManagedTag } from '@tanstack/react-router'
+import type { RouterManagedTag } from '@tomrehnstrom/react-router'
 
 export const useMeta = () => {
   const router = useRouter()

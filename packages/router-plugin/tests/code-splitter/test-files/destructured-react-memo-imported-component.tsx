@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 
 import { importedLoader } from '../shared/imported'
 

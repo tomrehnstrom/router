@@ -1,4 +1,4 @@
-import { notFound } from '@tanstack/react-router'
+import { notFound } from '@tomrehnstrom/react-router'
 import { createServerFn } from '@tanstack/start'
 import axios from 'redaxios'
 

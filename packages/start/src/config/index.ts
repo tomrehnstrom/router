@@ -32,7 +32,7 @@ import type {
   AppOptions as VinxiAppOptions,
   RouterSchemaInput as VinxiRouterSchemaInput,
 } from 'vinxi'
-import type { Manifest } from '@tanstack/react-router'
+import type { Manifest } from '@tomrehnstrom/react-router'
 import type * as vite from 'vite'
 import type { NitroOptions } from 'nitropack'
 

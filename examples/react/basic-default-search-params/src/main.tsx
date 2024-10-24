@@ -8,14 +8,14 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import axios from 'redaxios'
 import { z } from 'zod'
 import type {
   ErrorComponentProps,
   SearchSchemaInput,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 type PostType = {
   id: number

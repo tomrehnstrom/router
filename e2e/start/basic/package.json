@@ -10,7 +10,6 @@
     "test:e2e": "playwright test --project=chromium"
   },
   "dependencies": {
-    "@tanstack/react-router": "workspace:^",
     "@tanstack/router-devtools": "workspace:^",
     "@tanstack/start": "workspace:^",
     "react": "^18.3.1",
@@ -18,7 +17,8 @@
     "redaxios": "^0.5.1",
     "tailwind-merge": "^2.5.4",
     "vinxi": "0.4.3",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "@tomrehnstrom/react-router": "workspace:^"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.1",

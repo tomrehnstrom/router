@@ -1,4 +1,4 @@
-import { isMatch, Link, useMatches } from '@tanstack/react-router'
+import { isMatch, Link, useMatches } from '@tomrehnstrom/react-router'
 
 export const Breadcrumbs = () => {
   const matches = useMatches()

@@ -7,7 +7,7 @@ import {
   isPlainObject,
   pick,
   useRouter,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import jsesc from 'jsesc'
 import invariant from 'tiny-invariant'
 import type {
@@ -15,7 +15,7 @@ import type {
   AnyRouter,
   ExtractedEntry,
   StreamState,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 
 export function serializeLoaderData(
   dataType: '__beforeLoadContext' | 'loaderData',

@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tomrehnstrom/react-router'
 import { createServerFn, useServerFn } from '@tanstack/start'
 import { updateSession } from 'vinxi/http'
 import { hashPassword, prismaClient } from '~/utils/prisma'

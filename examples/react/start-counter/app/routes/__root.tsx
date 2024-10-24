@@ -1,6 +1,6 @@
 // app/routes/__root.tsx
-import { createRootRoute } from '@tanstack/react-router'
-import { Outlet, ScrollRestoration } from '@tanstack/react-router'
+import { createRootRoute } from '@tomrehnstrom/react-router'
+import { Outlet, ScrollRestoration } from '@tomrehnstrom/react-router'
 import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
 import * as React from 'react'
 

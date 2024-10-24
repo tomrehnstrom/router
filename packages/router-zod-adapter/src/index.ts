@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import type { SearchValidatorAdapter } from '@tanstack/react-router'
+import type { SearchValidatorAdapter } from '@tomrehnstrom/react-router'
 
 export interface ZodTypeLike {
   _input: any

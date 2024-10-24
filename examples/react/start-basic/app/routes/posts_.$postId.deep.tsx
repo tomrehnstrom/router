@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tomrehnstrom/react-router'
 import { fetchPost } from '../utils/posts'
 import { PostErrorComponent } from './posts.$postId'
 

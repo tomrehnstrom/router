@@ -1,5 +1,5 @@
 // import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tomrehnstrom/react-router'
 import { createServerFn, renderRsc } from '@tanstack/start'
 import { renderPosts } from '~/utils/renderPosts'
 

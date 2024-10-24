@@ -4,7 +4,7 @@ import {
   MatchRoute,
   Outlet,
   createFileRoute,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { Spinner } from '../components/Spinner'
 import { fetchInvoices } from '../utils/mockTodos'
 

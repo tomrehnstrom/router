@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet } from '@tomrehnstrom/react-router'
 import {
   importedComponent as ImportedComponent,
   importedLoader,

@@ -4,7 +4,7 @@ import {
   Outlet,
   ScrollRestoration,
   createRootRoute,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import {
   ClerkProvider,
   SignInButton,

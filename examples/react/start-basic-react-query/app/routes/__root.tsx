@@ -3,7 +3,7 @@ import {
   Outlet,
   ScrollRestoration,
   createRootRouteWithContext,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'

@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from '@tomrehnstrom/react-router'
 import * as React from 'react'
 
 const HeaderLink: typeof Link = (props) => {

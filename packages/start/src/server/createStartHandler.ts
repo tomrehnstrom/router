@@ -1,5 +1,5 @@
 import { eventHandler, getResponseHeaders, toWebRequest } from 'vinxi/http'
-import { createMemoryHistory } from '@tanstack/react-router'
+import { createMemoryHistory } from '@tomrehnstrom/react-router'
 import { serializeLoaderData } from '../client/serialization'
 import { mergeHeaders } from '../client/headers'
 import {
@@ -7,7 +7,7 @@ import {
   serverFnReturnTypeHeader,
 } from '../constants'
 import type { EventHandler, EventHandlerRequest, H3Event } from 'vinxi/http'
-import type { AnyRouter, Manifest } from '@tanstack/react-router'
+import type { AnyRouter, Manifest } from '@tomrehnstrom/react-router'
 import type { HandlerCallback } from './defaultStreamHandler'
 
 export type CustomizeStartHandler<TRouter extends AnyRouter> = (

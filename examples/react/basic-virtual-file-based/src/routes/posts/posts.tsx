@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
+import { Link, Outlet, createFileRoute } from '@tomrehnstrom/react-router'
 import { fetchPosts } from '../../posts'
 
 export const Route = createFileRoute('/posts')({

@@ -3,14 +3,14 @@ export {
   createBrowserHistory,
   createHashHistory,
   createMemoryHistory,
-} from '@tanstack/history'
+} from '@tomrehnstrom/history'
 export type {
   BlockerFn,
   HistoryLocation,
   RouterHistory,
   ParsedPath,
   HistoryState,
-} from '@tanstack/history'
+} from '@tomrehnstrom/history'
 export { default as invariant } from 'tiny-invariant'
 export { default as warning } from 'tiny-warning'
 

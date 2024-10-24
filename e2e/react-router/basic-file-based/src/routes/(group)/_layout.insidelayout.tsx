@@ -1,4 +1,4 @@
-import { createFileRoute, getRouteApi, useSearch } from '@tanstack/react-router'
+import { createFileRoute, getRouteApi, useSearch } from '@tomrehnstrom/react-router'
 import { z } from 'zod'
 import { zodSearchValidator } from '@tanstack/router-zod-adapter'
 

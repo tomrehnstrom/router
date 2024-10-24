@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, Outlet, createLazyRoute } from '@tanstack/react-router'
+import { Link, Outlet, createLazyRoute } from '@tomrehnstrom/react-router'
 
 export const Route = createLazyRoute('/posts')({
   component: PostsComponent,

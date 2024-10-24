@@ -1,4 +1,4 @@
-import { notFound } from '@tanstack/react-router'
+import { notFound } from '@tomrehnstrom/react-router'
 import axios from 'redaxios'
 
 export type PostType = {

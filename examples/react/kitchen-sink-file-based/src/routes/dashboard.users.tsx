@@ -5,7 +5,7 @@ import {
   Outlet,
   createFileRoute,
   useNavigate,
-} from '@tanstack/react-router'
+} from '@tomrehnstrom/react-router'
 import { z } from 'zod'
 import { Spinner } from '../components/Spinner'
 import { fetchUsers } from '../utils/mockTodos'

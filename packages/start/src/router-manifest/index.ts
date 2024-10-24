@@ -1,7 +1,7 @@
 // @ts-expect-error
 import tsrGetManifest from 'tsr:routes-manifest'
 import { getManifest } from 'vinxi/manifest'
-import type { Manifest } from '@tanstack/react-router'
+import type { Manifest } from '@tomrehnstrom/react-router'
 
 /**
  * @description Returns the full, unfiltered router manifest. This includes relationships
