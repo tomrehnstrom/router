@@ -1,10 +1,9 @@
 {
   "name": "root",
   "private": true,
-  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomrehnstrom/router.git"
+    "url": "https://github.com/TanStack/router.git"
   },
   "packageManager": "pnpm@9.12.2",
   "type": "module",
