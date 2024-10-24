@@ -89,5 +89,9 @@
     "@tanstack/router-generator": {
       "optional": true
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
+
