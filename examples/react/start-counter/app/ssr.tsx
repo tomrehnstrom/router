@@ -3,8 +3,8 @@
 import {
   createStartHandler,
   defaultStreamHandler,
-} from '@tanstack/start/server'
-import { getRouterManifest } from '@tanstack/start/router-manifest'
+} from '@tomrehnstrom/start/server'
+import { getRouterManifest } from '@tomrehnstrom/start/router-manifest'
 
 import { createRouter } from './router'
 

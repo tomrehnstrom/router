@@ -1,6 +1,6 @@
 import {
   createStartAPIHandler,
   defaultAPIFileRouteHandler,
-} from '@tanstack/start/api'
+} from '@tomrehnstrom/start/api'
 
 export default createStartAPIHandler(defaultAPIFileRouteHandler)

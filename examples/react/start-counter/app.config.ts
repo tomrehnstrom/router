@@ -1,4 +1,4 @@
 // app.config.ts
-import { defineConfig } from '@tanstack/start/config'
+import { defineConfig } from '@tomrehnstrom/start/config'
 
 export default defineConfig({})

@@ -380,7 +380,7 @@ Check it out at https://tanstack.com/start/`,
               Start as we are? Let's push the boundaries of Start together!
             </div>
             <a
-              href="mailto:partners@tanstack.com?subject=TanStack Start Partnership"
+              href="mailto:partners@tomrehnstrom.com?subject=TanStack Start Partnership"
               className="text-blue-500 uppercase font-black text-sm"
             >
               Let's chat
@@ -472,9 +472,9 @@ Check it out at https://tanstack.com/start/`,
       {/* {[''].includes(framework) ? (
         <div className="px-2">
           <div className="p-8 text-center text-lg w-full max-w-screen-lg mx-auto bg-black text-white rounded-xl">
-            Looking for the <strong>@tanstack/{framework}-query</strong>{' '}
+            Looking for the <strong>@tomrehnstrom/{framework}-query</strong>{' '}
             example? We could use your help to build the{' '}
-            <strong>@tanstack/{framework}-query</strong> adapter! Join the{' '}
+            <strong>@tomrehnstrom/{framework}-query</strong> adapter! Join the{' '}
             <a
               href="https://tlinz.com/discord"
               className="text-teal-500 font-bold"

@@ -49,7 +49,7 @@ export function compileCreateServerFnOutput(opts: ParseAstOptions) {
 
         programPath.traverse({
           ImportDeclaration: (path) => {
-            if (path.node.source.value !== '@tanstack/start') {
+            if (path.node.source.value !== '@tomrehnstrom/start') {
               return
             }
 

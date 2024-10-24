@@ -1,4 +1,4 @@
-import { TanStackRouterEsbuild } from '@tanstack/router-plugin/esbuild'
+import { TanStackRouterEsbuild } from '@tomrehnstrom/router-plugin/esbuild'
 
 export default {
   jsx: 'transform',

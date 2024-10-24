@@ -3,14 +3,14 @@ import type { ApplyParams, PeerDependency } from './types'
 
 export const dependencies = [
   '@tomrehnstrom/react-router',
-  '@tanstack/router-devtools',
+  '@tomrehnstrom/router-devtools',
   'react',
   'react-dom',
 ] as const satisfies Array<PeerDependency>
 export const devDependencies = [
   '@types/react',
   '@types/react-dom',
-  '@tanstack/router-plugin',
+  '@tomrehnstrom/router-plugin',
 ] as const satisfies Array<PeerDependency>
 
 export const scripts = {

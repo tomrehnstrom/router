@@ -219,7 +219,7 @@ export const Route = createRootRoute({
             (match, p1, p2, p3) => `${p1}${escapedRoutePath}${p3}`,
           )
           .replace(
-            /(import\s*\{.*)(create(Lazy)?FileRoute)(.*\}\s*from\s*['"]@tanstack\/react-router['"])/gs,
+            /(import\s*\{.*)(create(Lazy)?FileRoute)(.*\}\s*from\s*['"]@tomrehnstrom\/react-router['"])/gs,
             (match, p1, p2, p3, p4) =>
               `${p1}${node.isLazy ? 'createLazyFileRoute' : 'createFileRoute'}${p4}`,
           )
@@ -361,7 +361,7 @@ export const Route = createRootRoute({
 
     if (!routeCode) {
       const replaced = `import { json } from '@tomrehnstrom/start'
-import { createAPIFileRoute } from '@tanstack/start/api'
+import { createAPIFileRoute } from '@tomrehnstrom/start/api'
 
 export const Route = createAPIFileRoute('${escapedRoutePath}')({
   GET: ({ request, params }) => {

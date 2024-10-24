@@ -79,7 +79,7 @@ export function createServerFn<
 
   invariant(
     compiledFn.url,
-    `createServerFn must be called with a function that is marked with the 'use server' pragma. Are you using the @tanstack/router-plugin/vite ?`,
+    `createServerFn must be called with a function that is marked with the 'use server' pragma. Are you using the @tomrehnstrom/router-plugin/vite ?`,
   )
 
   return Object.assign(

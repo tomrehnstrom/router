@@ -150,7 +150,7 @@ function findRoute<TPayload = unknown>(
  * @example
  * ```ts
  * // app/foo.ts
- * import { createAPIRoute } from '@tanstack/start/api'
+ * import { createAPIRoute } from '@tomrehnstrom/start/api'
  * const fooBarRoute = createAPIRoute('/api/foo/$bar')({
  *  GET: ({ params }) => {
  *   return new Response(JSON.stringify({ params }))
@@ -161,7 +161,7 @@ function findRoute<TPayload = unknown>(
  * import {
  *    createStartAPIHandler,
  *    defaultAPIRoutesHandler
- * } from '@tanstack/start/api'
+ * } from '@tomrehnstrom/start/api'
  *
  * export default createStartAPIHandler(
  *  defaultAPIRoutesHandler({
@@ -305,7 +305,7 @@ function toTSRFileBasedRoutes(
  * import {
  *    createStartAPIHandler,
  *    defaultAPIFileRouteHandler
- * } from '@tanstack/start/api'
+ * } from '@tomrehnstrom/start/api'
  *
  * export default createStartAPIHandler(defaultAPIFileRouteHandler)
  * ```

@@ -14,7 +14,7 @@ interface Plugin extends Omit<ESLint.Plugin, 'rules'> {
 
 const plugin: Plugin = {
   meta: {
-    name: '@tanstack/eslint-plugin-router',
+    name: '@tomrehnstrom/eslint-plugin-router',
   },
   configs: {} as Plugin['configs'],
   rules,
@@ -23,18 +23,18 @@ const plugin: Plugin = {
 // Assign configs here so we can reference `plugin`
 Object.assign(plugin.configs, {
   recommended: {
-    plugins: ['@tanstack/eslint-plugin-router'],
+    plugins: ['@tomrehnstrom/eslint-plugin-router'],
     rules: {
-      '@tanstack/router/create-route-property-order': 'warn',
+      '@tomrehnstrom/router/create-route-property-order': 'warn',
     },
   },
   'flat/recommended': [
     {
       plugins: {
-        '@tanstack/router': plugin,
+        '@tomrehnstrom/router': plugin,
       },
       rules: {
-        '@tanstack/router/create-route-property-order': 'warn',
+        '@tomrehnstrom/router/create-route-property-order': 'warn',
       },
     },
   ],

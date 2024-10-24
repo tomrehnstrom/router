@@ -61,13 +61,13 @@
     "@tomrehnstrom/router-devtools": "workspace:^"
   },
   "peerDependenciesMeta": {
-    "@tanstack/react-router": {
+    "@tomrehnstrom/react-router": {
       "optional": true
     },
-    "@tanstack/router-devtools": {
+    "@tomrehnstrom/router-devtools": {
       "optional": true
     },
-    "@tanstack/router-plugin": {
+    "@tomrehnstrom/router-plugin": {
       "optional": true
     },
     "@vitejs/plugin-react": {

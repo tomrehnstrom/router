@@ -28,7 +28,7 @@ export function TanStackStartViteCreateServerFn(): Plugin {
       if (code.includes('createServerFn')) {
         if (code.includes('@react-refresh')) {
           throw new Error(
-            `We detected that the '@vitejs/plugin-react' was passed before '@tanstack/start-vite-plugin'. Please make sure that '@tanstack/router-vite-plugin' is passed before '@vitejs/plugin-react' and try again: 
+            `We detected that the '@vitejs/plugin-react' was passed before '@tomrehnstrom/start-vite-plugin'. Please make sure that '@tomrehnstrom/router-vite-plugin' is passed before '@vitejs/plugin-react' and try again: 
 e.g.
 
 plugins: [

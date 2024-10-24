@@ -1,7 +1,7 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import { TanStackRouterWebpack } from '@tanstack/router-plugin/webpack'
+import { TanStackRouterWebpack } from '@tomrehnstrom/router-plugin/webpack'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 

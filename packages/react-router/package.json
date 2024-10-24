@@ -70,7 +70,7 @@
     "@tomrehnstrom/router-generator": "workspace:*"
   },
   "peerDependenciesMeta": {
-    "@tanstack/router-generator": {
+    "@tomrehnstrom/router-generator": {
       "optional": true
     }
   },

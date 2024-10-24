@@ -293,7 +293,7 @@ export function defineConfig(
           ...(getUserConfig(opts.vite).plugins || []),
           ...(getUserConfig(opts.routers?.client?.vite).plugins || []),
           serverFunctions.client({
-            runtime: '@tanstack/start/client-runtime',
+            runtime: '@tomrehnstrom/start/client-runtime',
           }),
           reactRefresh({
             babel: opts.react?.babel,
@@ -314,7 +314,7 @@ export function defineConfig(
                   ...(getUserConfig(opts.vite).userConfig.ssr || {}),
                   ...(getUserConfig(opts.routers?.api?.vite).userConfig.ssr ||
                     {}),
-                  noExternal: ['@tanstack/start', 'tsr:routes-manifest'],
+                  noExternal: ['@tomrehnstrom/start', 'tsr:routes-manifest'],
                 },
               }),
               TanStackRouterVite({
@@ -335,7 +335,7 @@ export function defineConfig(
                 ...(getUserConfig(opts.vite).plugins || []),
                 ...(getUserConfig(opts.routers?.api?.vite).plugins || []),
                 // serverTransform({
-                //   runtime: '@tanstack/start/server-runtime',
+                //   runtime: '@tomrehnstrom/start/server-runtime',
                 // }),
                 // config('start-api', {
                 //   ssr: {
@@ -365,7 +365,7 @@ export function defineConfig(
           ...(getUserConfig(opts.vite).plugins || []),
           ...(getUserConfig(opts.routers?.ssr?.vite).plugins || []),
           serverTransform({
-            runtime: '@tanstack/start/server-runtime',
+            runtime: '@tomrehnstrom/start/server-runtime',
           }),
           config('start-ssr', {
             ssr: {
@@ -387,10 +387,10 @@ export function defineConfig(
         base: serverBase,
         // TODO: RSCS - enable this
         // worker: true,
-        handler: importToProjectRelative('@tanstack/start/server-handler'),
+        handler: importToProjectRelative('@tomrehnstrom/start/server-handler'),
         plugins: () => [
           serverFunctions.server({
-            runtime: '@tanstack/start/react-server-runtime',
+            runtime: '@tomrehnstrom/start/react-server-runtime',
             // TODO: RSCS - remove this
             resolve: {
               conditions: [],
@@ -464,10 +464,10 @@ function withStartPlugins(
         ssr: {
           ...(userConfig.ssr || {}),
           ...(routerUserConfig.ssr || {}),
-          noExternal: ['@tanstack/start', 'tsr:routes-manifest'],
+          noExternal: ['@tomrehnstrom/start', 'tsr:routes-manifest'],
         },
         // optimizeDeps: {
-        //   include: ['@tanstack/start/server-runtime'],
+        //   include: ['@tomrehnstrom/start/server-runtime'],
         // },
       }),
       TanStackRouterVite({

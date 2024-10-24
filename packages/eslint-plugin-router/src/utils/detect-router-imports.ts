@@ -56,7 +56,7 @@ export function detectTanstackRouterImports(create: EnhancedCreate): Create {
         if (
           node.specifiers.length > 0 &&
           node.importKind === 'value' &&
-          node.source.value.startsWith('@tanstack/') &&
+          node.source.value.startsWith('@tomrehnstrom/') &&
           node.source.value.endsWith('-router')
         ) {
           tanstackRouterImportSpecifiers.push(...node.specifiers)
