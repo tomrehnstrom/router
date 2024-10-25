@@ -67,7 +67,7 @@
       "use-sync-external-store": "1.2.2",
       "@betterblockingrouter/history": "workspace:*",
       "@tanstack/react-cross-context": "workspace:*",
-      "@tanstack/react-router": "workspace:@betterblockingrouter/react-router@*",
+      "@betterblockingrouter/react-router": "workspace:*",
       "@tanstack/router-cli": "workspace:*",
       "@tanstack/router-devtools": "workspace:*",
       "@tanstack/router-generator": "workspace:*",

@@ -67,7 +67,7 @@
     "@vitejs/plugin-react": "^4.3.3",
     "react": ">=18",
     "react-dom": ">=18",
-    "@tanstack/react-router": "workspace:*",
+    "@tanstack/react-router": "workspace:@betterblockingrouter/react-router@*",
     "@tanstack/react-query": ">=5.59.15"
   },
   "peerDependencies": {
