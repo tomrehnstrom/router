@@ -2,7 +2,7 @@ import {
   createBrowserHistory,
   createMemoryHistory,
   parseHref,
-} from '@tanstack/history'
+} from '@tomrehnstrom/history'
 import { Store } from '@tanstack/react-store'
 import invariant from 'tiny-invariant'
 import warning from 'tiny-warning'
@@ -35,7 +35,7 @@ import type {
   HistoryLocation,
   HistoryState,
   RouterHistory,
-} from '@tanstack/history'
+} from '@tomrehnstrom/history'
 import type { NoInfer } from '@tanstack/react-store'
 import type { Manifest } from './manifest'
 import type {

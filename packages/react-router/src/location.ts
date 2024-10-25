@@ -1,4 +1,4 @@
-import type { HistoryState } from '@tanstack/history'
+import type { HistoryState } from '@tomrehnstrom/history'
 import type { AnySearchSchema } from './route'
 
 export interface ParsedLocation<TSearchObj extends AnySearchSchema = {}> {

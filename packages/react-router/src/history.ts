@@ -1,6 +1,6 @@
-import type { HistoryLocation } from '@tanstack/history'
+import type { HistoryLocation } from '@tomrehnstrom/history'
 
-declare module '@tanstack/history' {
+declare module '@tomrehnstrom/history' {
   interface HistoryState {
     __tempLocation?: HistoryLocation
     __tempKey?: string

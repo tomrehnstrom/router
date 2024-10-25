@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useRouter } from './useRouter'
 import { matchPathname } from './path'
 import type { MatchLocation } from './RouterProvider'
-import type { BlockerFn, BlockerFnArgs } from '@tanstack/history'
+import type { BlockerFn, BlockerFnArgs } from '@tomrehnstrom/history'
 
 type Optional<T> =
   | T
