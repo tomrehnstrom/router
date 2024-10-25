@@ -1,6 +1,6 @@
-import type { HistoryLocation } from '@tomrehnstrom/history'
+import type { HistoryLocation } from '@betterblockerrouter/history'
 
-declare module '@tomrehnstrom/history' {
+declare module '@betterblockerrouter/history' {
   interface HistoryState {
     __tempLocation?: HistoryLocation
     __tempKey?: string

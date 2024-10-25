@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useRouter } from './useRouter'
 import { matchPathname } from './path'
-import type { BlockerFnArgs } from '@tomrehnstrom/history'
+import type { BlockerFnArgs } from '@betterblockerrouter/history'
 import type { UseBlockerOpts } from './useBlocker'
 
 export function usePromiseBlocker({

@@ -3,14 +3,14 @@ export {
   createBrowserHistory,
   createHashHistory,
   createMemoryHistory,
-} from '@tomrehnstrom/history'
+} from '@betterblockerrouter/history'
 export type {
   BlockerFn,
   HistoryLocation,
   RouterHistory,
   ParsedPath,
   HistoryState,
-} from '@tomrehnstrom/history'
+} from '@betterblockerrouter/history'
 export { default as invariant } from 'tiny-invariant'
 export { default as warning } from 'tiny-warning'
 

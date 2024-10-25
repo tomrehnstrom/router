@@ -65,9 +65,9 @@
     "overrides": {
       "eslint": "$eslint",
       "use-sync-external-store": "1.2.2",
-      "@tomrehnstrom/history": "workspace:*",
+      "@betterblockerrouter/history": "workspace:*",
       "@tanstack/react-cross-context": "workspace:*",
-      "@tanstack/react-router": "workspace:@tomrehnstrom/react-router@*",
+      "@tanstack/react-router": "workspace:@betterblockerrouter/react-router@*",
       "@tanstack/router-cli": "workspace:*",
       "@tanstack/router-devtools": "workspace:*",
       "@tanstack/router-generator": "workspace:*",
