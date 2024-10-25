@@ -13,7 +13,7 @@ import {
   useBlocker,
   useNavigate,
 } from '../src'
-import type { BlockerFn } from '@betterblockerrouter/history'
+import type { BlockerFn } from '@betterblockingrouter/history'
 
 afterEach(() => {
   window.history.replaceState(null, 'root', '/')

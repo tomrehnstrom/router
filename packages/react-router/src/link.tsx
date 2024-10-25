@@ -12,7 +12,7 @@ import {
 } from './utils'
 import { exactPathTest, removeTrailingSlash } from './path'
 import type { ParsedLocation } from './location'
-import type { HistoryState } from '@betterblockerrouter/history'
+import type { HistoryState } from '@betterblockingrouter/history'
 import type {
   AllParams,
   CatchAllPaths,

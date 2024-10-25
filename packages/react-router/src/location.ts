@@ -1,4 +1,4 @@
-import type { HistoryState } from '@betterblockerrouter/history'
+import type { HistoryState } from '@betterblockingrouter/history'
 import type { AnySearchSchema } from './route'
 
 export interface ParsedLocation<TSearchObj extends AnySearchSchema = {}> {
