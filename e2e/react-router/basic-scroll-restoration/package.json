@@ -11,7 +11,7 @@
     "test:e2e": "playwright test --project=chromium"
   },
   "dependencies": {
-    "@tanstack/react-router": "workspace:^",
+    "@tanstack/react-router": "workspace:@betterblockingrouter/react-router@*",
     "@tanstack/react-virtual": "^3.11.1",
     "@tanstack/router-devtools": "workspace:^",
     "react": "^18.2.0",

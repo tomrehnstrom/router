@@ -1,5 +1,5 @@
 {
-  "name": "@tanstack/history",
+  "name": "@betterblockingrouter/history",
   "version": "1.87.6",
   "description": "Modern and scalable routing for React applications",
   "author": "Tanner Linsley",

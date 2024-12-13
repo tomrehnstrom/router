@@ -49,7 +49,7 @@
     "@rsbuild/core": "^1.0.2",
     "@rsbuild/plugin-react": "^1.0.1",
     "@swc/core": "^1.7.25",
-    "@tanstack/react-router": "workspace:^",
+    "@tanstack/react-router": "workspace:@betterblockingrouter/react-router@*",
     "@tanstack/router-devtools": "workspace:^",
     "@tanstack/router-plugin": "workspace:^",
     "@types/react": "^18.3.3",

@@ -62,7 +62,7 @@
     "node": ">=12"
   },
   "devDependencies": {
-    "@tanstack/react-router": "workspace:*",
+    "@tanstack/react-router": "workspace:@betterblockingrouter/react-router@*",
     "arktype": "^2.0.0-rc.26",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
